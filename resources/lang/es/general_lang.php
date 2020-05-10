@@ -5,10 +5,10 @@ return [
      * | General App Language Lines
      * |---------------------------
      */
-    'company_name' => 'iMPRECOf S.A.S',
-    'company_name_separate' => 'iMPRECOf S.A.S',
-    'company_slogan' => 'Calle 105 # 24-106 PROVENZA',
-    'company_phone' => '(57-7) 6455889 - 6349268 (57-7) 3168348397',
+    'company_name' => 'PROIMCOF',
+    'company_name_separate' => 'PROIMCOF',
+    'company_slogan' => 'Calle 103 # 23-38 PROVENZA',
+    'company_phone' => '(57-7) 6045919 - 316 834 8397',
     'company_email' => 'ventas@imprecof.com',
     
     'copyright_copyright' => 'Copyright &copy; {0}',
@@ -16,7 +16,7 @@ return [
     'copyright_url_page' => 'https://www.linkedin.com/in/rodolfo-perez-gomez-2622a2b2/',
     
     'title' => '::: iMPRECOf S.A.S :::',
-    'author' => 'Rodolfo P茅rez',
+    'author' => 'Rodolfo P閞ez',
     'description' => 'Somos un equipo de trabajo dedicado a desarrollar e implementar estrategias tecnol贸gicas. Estudiamos soluciones de las mejores marcas para garantizar su inversi贸n, trabajamos por el desarrollo de sus ideas, brindamos plataformas de gesti贸n y administraci贸n creadas para ofrecer las respuestas a los requerimientos de la industria.',
     'keywords' => 'impresoras, IMPRECOF, imprecof.com, empresa, rodolfo, kiosera, rioh, toshiba',
     
