@@ -97,6 +97,7 @@ $sessionDto = $sessionDto instanceof SessionDto ? $sessionDto : new SessionDto()
                                     <?php echo lang('general.welcome_to_app', lang('general.company_name')); ?>
                                 </span>
                             </li>
+                            
                             <li>
                                 <a href="<?php echo site_url('login/close'); ?>">
                                     <i class="fa fa-sign-out"></i> <?php echo lang('general.log_out'); ?>
