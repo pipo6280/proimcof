@@ -9,13 +9,13 @@ return [
     'company_name_separate' => 'PROIMCOF',
     'company_slogan' => 'Calle 103 # 23-38 PROVENZA',
     'company_phone' => '(57-7) 6045919 - 316 834 8397',
-    'company_email' => 'ventas@proincof.com',
+    'company_email' => 'ventas@proimcof.com',
     
     'copyright_copyright' => 'Copyright &copy; {0}',
     'copyright_company' => 'Ingeniero Rodolfo Pérez',
     'copyright_url_page' => 'https://www.linkedin.com/in/rodolfo-perez-gomez-2622a2b2/',
     
-    'title' => '::: iMPRECOf S.A.S :::',
+    'title' => '::: PROIMCOF :::',
     'author' => 'Rodolfo Pérez',
     'description' => 'Somos un equipo de trabajo dedicado a desarrollar e implementar estrategias tecnológicas. Estudiamos soluciones de las mejores marcas para garantizar su inversión, trabajamos por el desarrollo de sus ideas, brindamos plataformas de gestión y administración creadas para ofrecer las respuestas a los requerimientos de la industria.',
     'keywords' => 'impresoras, proincof, proincof.com, empresa, rodolfo, kiosera, rioh, toshiba',

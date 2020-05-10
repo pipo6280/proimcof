@@ -69,7 +69,7 @@ class MenuModel
         			<li><a href="<?php echo site_url('login/close'); ?>"><?php echo lang('general.log_out'); ?></a></li>
         		</ul>
         	</div>
-        	<div class="logo-element" data-toggle="tooltip" title="<?php echo lang('general.company_name'); ?>">MC</div>
+        	<div class="logo-element" data-toggle="tooltip" title="<?php echo lang('general.company_name'); ?>">PRMCF</div>
         </li>
         <?php
         $buffer = ob_get_contents();
