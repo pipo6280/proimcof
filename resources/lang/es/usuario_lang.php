@@ -1,0 +1,26 @@
+<?php
+return [
+    'codigo' => 'Código',
+    'perfil' => 'Perfil',
+    'estado' => 'Estado',
+    'activo' => 'Activo',
+    'nombre_perfil' => 'Nombre del Perfil',
+    'nuevo_perfil' => 'Nuevo Perfil',
+    'usuario_asociados' => 'Usuarios Asociados',
+    'permisos' => 'Permisos',
+    'usuario' => 'Usuario',
+    'usuario_title' => 'Nombre del Usuario',
+    'eliminar_perfil_asociado' => 'Eliminar Perfil Asociado',
+    'nota_busquedad' => 'Para ir directamente al menu deseado sin perder herencia utilize la combinación de teclas del navegador <b>CTRL + F</b>',
+    'marcar_desmarcar' => 'Marcar/Desmarcar todos los permisos',
+    'select_all' => 'All',
+    'modulo' => 'Modulo',
+    'permiso_view' => 'View',
+    'permiso_add' => 'Add',
+    'permiso_edit' => 'Edit',
+    'permiso_del' => 'Del',
+    'menu_id' => 'Menú ID',
+    'menu' => 'Menú',
+    'perfil_asignado' => 'Asignar Todos',
+    'busqueda' => 'Busqueda de Usuario'
+];

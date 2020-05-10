@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookmarks>
+   <site url="http://download.eclipse.org/efxclipse/updates-released/2.4.0/site" selected="true" name="e(fx)clipse"/>
+   <site url="http://download.jboss.org/jbosstools/updates/stable/" selected="true" name="Hibernate"/>
+   <site url="http://download.jboss.org/jbosstools/neon/stable/updates/" selected="true" name="Jboss"/>
+   <site url="http://download.eclipse.org/releases/neon" selected="true" name="Neon"/>
+   <site url="http://download.eclipse.org/oomph/updates/milestone/latest" selected="true" name="Oomph Latest Milestone"/>
+   <site url="http://download.eclipse.org/tools/orbit/downloads/drops/R20150821153341/repository/" selected="true" name="Orbit-R20150821153341"/>
+   <site url="https://devstudio.redhat.com/10.0/stable/updates/" selected="true" name="Red Hat Developer Studio - Core + Central Update Site"/>
+   <site url="http://download.eclipse.org/eclipse/updates/4.6" selected="true" name="The Eclipse Project Updates"/>
+   <site url="http://download.eclipse.org/webtools/repository/neon" selected="true" name="The Eclipse Web Tools Platform (WTP) software repository"/>
+   <site url="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/" selected="true" name="Xtext All In One - Releases"/>
+   <site url="http://download.eclipse.org/modeling/emft/mwe/updates/" selected="false" name=""/>
+   <site url="http://download.eclipse.org/modeling/m2t/updates/" selected="false" name=""/>
+   <site url="http://download.eclipse.org/modeling/m2t/xpand/updates/" selected="false" name=""/>
+   <site url="http://download.eclipse.org/modeling/tmf/updates/" selected="false" name=""/>
+   <site url="http://download.eclipse.org/modeling/tmf/xtext/updates/" selected="false" name=""/>
+   <site url="http://download.eclipse.org/technology/epp/packages/neon/" selected="true" name=""/>
+</bookmarks>

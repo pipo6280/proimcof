@@ -1,0 +1,29 @@
+[18-Jan-2018 21:18:35 UTC] PHP Warning:  require(/home/jl3tbvvawnh1/public_html/facturacion/bootstrap/autoload.php): failed to open stream: No such file or directory in /home/jl3tbvvawnh1/public_html/facturacion/index.php on line 2
+[18-Jan-2018 21:18:35 UTC] PHP Fatal error:  require(): Failed opening required '/home/jl3tbvvawnh1/public_html/facturacion/bootstrap/autoload.php' (include_path='.:/opt/alt/php71/usr/share/pear') in /home/jl3tbvvawnh1/public_html/facturacion/index.php on line 2
+[19-Jan-2018 14:20:47 UTC] PHP Warning:  require(/home/jl3tbvvawnh1/public_html/facturacion/bootstrap/autoload.php): failed to open stream: No such file or directory in /home/jl3tbvvawnh1/public_html/facturacion/index.php on line 2
+[19-Jan-2018 14:20:47 UTC] PHP Fatal error:  require(): Failed opening required '/home/jl3tbvvawnh1/public_html/facturacion/bootstrap/autoload.php' (include_path='.:/opt/alt/php71/usr/share/pear') in /home/jl3tbvvawnh1/public_html/facturacion/index.php on line 2
+[23-Jan-2018 16:37:42 UTC] PHP Warning:  require(/home/jl3tbvvawnh1/public_html/facturacion/bootstrap/autoload.php): failed to open stream: No such file or directory in /home/jl3tbvvawnh1/public_html/facturacion/index.php on line 2
+[23-Jan-2018 16:37:42 UTC] PHP Fatal error:  require(): Failed opening required '/home/jl3tbvvawnh1/public_html/facturacion/bootstrap/autoload.php' (include_path='.:/opt/alt/php71/usr/share/pear') in /home/jl3tbvvawnh1/public_html/facturacion/index.php on line 2
+[23-Jan-2018 16:37:49 UTC] PHP Warning:  require(/home/jl3tbvvawnh1/public_html/facturacion/bootstrap/autoload.php): failed to open stream: No such file or directory in /home/jl3tbvvawnh1/public_html/facturacion/index.php on line 2
+[23-Jan-2018 16:37:49 UTC] PHP Fatal error:  require(): Failed opening required '/home/jl3tbvvawnh1/public_html/facturacion/bootstrap/autoload.php' (include_path='.:/opt/alt/php71/usr/share/pear') in /home/jl3tbvvawnh1/public_html/facturacion/index.php on line 2
+[03-Apr-2018 02:00:27 UTC] PHP Warning:  require(/home/jl3tbvvawnh1/public_html/facturacion/bootstrap/../vendor/autoload.php): failed to open stream: No such file or directory in /home/jl3tbvvawnh1/public_html/facturacion/bootstrap/autoload.php on line 14
+[03-Apr-2018 02:00:27 UTC] PHP Fatal error:  require(): Failed opening required '/home/jl3tbvvawnh1/public_html/facturacion/bootstrap/../vendor/autoload.php' (include_path='.:/opt/alt/php71/usr/share/pear') in /home/jl3tbvvawnh1/public_html/facturacion/bootstrap/autoload.php on line 14
+[03-Apr-2018 02:00:30 UTC] PHP Warning:  require(/home/jl3tbvvawnh1/public_html/facturacion/bootstrap/../vendor/autoload.php): failed to open stream: No such file or directory in /home/jl3tbvvawnh1/public_html/facturacion/bootstrap/autoload.php on line 14
+[03-Apr-2018 02:00:30 UTC] PHP Fatal error:  require(): Failed opening required '/home/jl3tbvvawnh1/public_html/facturacion/bootstrap/../vendor/autoload.php' (include_path='.:/opt/alt/php71/usr/share/pear') in /home/jl3tbvvawnh1/public_html/facturacion/bootstrap/autoload.php on line 14
+[03-Apr-2018 02:00:45 UTC] PHP Warning:  require(/home/jl3tbvvawnh1/public_html/facturacion/bootstrap/../vendor/autoload.php): failed to open stream: No such file or directory in /home/jl3tbvvawnh1/public_html/facturacion/bootstrap/autoload.php on line 14
+[03-Apr-2018 02:00:45 UTC] PHP Fatal error:  require(): Failed opening required '/home/jl3tbvvawnh1/public_html/facturacion/bootstrap/../vendor/autoload.php' (include_path='.:/opt/alt/php71/usr/share/pear') in /home/jl3tbvvawnh1/public_html/facturacion/bootstrap/autoload.php on line 14
+[02-Apr-2018 21:06:50 America/Bogota] PHP Fatal error:  Uncaught Error: Call to undefined method system\Core\Exceptions::setLogException() in /home/jl3tbvvawnh1/public_html/facturacion/system/Helpers/helpers.php:1033
+Stack trace:
+#0 [internal function]: _exception_handler(Object(Error))
+#1 {main}
+  thrown in /home/jl3tbvvawnh1/public_html/facturacion/system/Helpers/helpers.php on line 1033
+[25-Apr-2018 21:21:24 America/Bogota] PHP Fatal error:  Uncaught Error: Call to undefined method system\Core\Exceptions::setLogException() in /home/jl3tbvvawnh1/public_html/facturacion/system/Helpers/helpers.php:1033
+Stack trace:
+#0 [internal function]: _exception_handler(Object(Error))
+#1 {main}
+  thrown in /home/jl3tbvvawnh1/public_html/facturacion/system/Helpers/helpers.php on line 1033
+[25-Apr-2018 21:21:26 America/Bogota] PHP Fatal error:  Uncaught Error: Call to undefined method system\Core\Exceptions::setLogException() in /home/jl3tbvvawnh1/public_html/facturacion/system/Helpers/helpers.php:1033
+Stack trace:
+#0 [internal function]: _exception_handler(Object(Error))
+#1 {main}
+  thrown in /home/jl3tbvvawnh1/public_html/facturacion/system/Helpers/helpers.php on line 1033

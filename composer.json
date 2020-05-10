@@ -1,0 +1,25 @@
+{
+  "name" : "Eminsoft - ERP",
+  "description" : "Sistema de planificación de recursos empresariales - Eminsoft",
+  "version" : "1.0",
+  "require" : {
+    "php" : ">=5.5.7",
+    "phpmailer/phpmailer" : "^5.2",
+    "doctrine/dbal": "v2.5.4"
+  },
+  "authors" : [ {
+    "name" : "Eminson Mendoza",
+    "email" : "emiaster16@gmail.com"
+  } ],
+  "keywords" : [ "framework", "eminSoft" ],
+  "support" : { },
+  "autoload" : {
+    "files" : [ "app/config/config.php", "app/config/database.php", "app/config/constants.php", "system/Helpers/helpers.php", "system/Core/Exceptions.php" ],
+    "psr-4" : {
+      "system\\" : "system/",
+      "app\\" : "app/"
+    }
+  },
+  "license" : "MIT",
+  "homepage" : "http://eminsoft.net/"
+}
