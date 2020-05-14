@@ -1,0 +1,5 @@
+
+.settings/org.eclipse.core.resources.prefs
+*.php
+storage/logs/log-2020-05-09.php
+storage/logs/log-2020-05-10.php
