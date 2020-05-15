@@ -1,18 +1,13 @@
 <?php 
+use app\enums\ESiNo;
 use system\Helpers\Form;
 use system\Helpers\Html;
-use app\enums\ESiNo;
 
 echo Form::open(['action' => 'Login@login', 'id' =>  'frmLogin', 'role' => 'role', 'class' => 'login-form']); ?>
-    <div class="col s12 z-depth-4 card-panel">
+    <div class="col s12 z-depth-1 card-panel horizontal">
         <div class="row">
             <div class="input-field col s12 center">
                 <?php echo Html::image('login-logo.png', '', ['class' => ' responsive-img valign']) ?>
-                <p class="center login-form-text">
-                    <?php
-                        //echo lang('general.company_name');
-                    ?>
-                </p>
             </div>
         </div>
         
@@ -34,7 +29,7 @@ echo Form::open(['action' => 'Login@login', 'id' =>  'frmLogin', 'role' => 'role
             <div class="input-field col s12">
                 <?php 
                     echo Form::button(lang('login.login') . '<i class="mdi-action-lock-open right"></i>', [
-                        'class' => 'btn indigo darken-4 waves-effect waves-blue right',
+                        'class' => 'btn light-blue darken-3 waves-effect waves-blue right',
                         'id' => 'btnLogin',
                         'type' => 'submit'
                     ]); 
