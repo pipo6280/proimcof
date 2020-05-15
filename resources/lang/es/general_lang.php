@@ -28,6 +28,7 @@ return [
     'birthday_customer_count' => '{0} cliente(s) están de cumpleaños',
     'photo_profile_avatar' => 'public/img/perfil/avatar.jpg',
     'photo_profile_logo' => 'public/img/login-logo.png',
+    'photo_app_logo' => 'public/img/logo_app.png',
     'birthday_customer_all' => 'Ver próximos cumpleaños',
     'birthday_customer_from' => 'Cliente desde: {0}',
     'birthday_customer_contact' => 'Contacto: {0}',

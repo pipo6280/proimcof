@@ -220,7 +220,6 @@ class LoginController extends \system\Core\Controller
                             $message = $email->getLog_errors();
                         }
                         
-                        
                         log_message('debug', $message);
                     } else {
                         $message = lang('general.operation_message');

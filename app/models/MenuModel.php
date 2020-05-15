@@ -41,7 +41,7 @@ class MenuModel
                             Util::userSessionDto()->getPhotoProfile()
                         ]);
                         if (! Util::fileExists($filename)) {
-                            $filename = lang('general.photo_profile_logo');
+                            $filename = lang('general.photo_app_logo');
                         }
                     ?>
                     <img src="<?php echo site_url($filename)?>" alt="" class="" data-pin-nopin="true" style="width: 160px;">
