@@ -3,3 +3,14 @@
 *.php
 storage/logs/log-2020-05-09.php
 storage/logs/log-2020-05-10.php
+composer.phar
+DATABASE-02-04-2018.sql
+DATABASE-04-04-2018.sql
+DATABASE-10-05-2017.sql
+DATABASE-17-01-2018.sql
+DATABASE-17-07-2018.sql
+DATABASE-20-17-2017.sql
+DATABASE-24-04-2018.sql
+DATABASE-29-01-2018.sql
+storage/logs/log-2020-05-09.php
+storage/logs/log-2020-05-10.php
