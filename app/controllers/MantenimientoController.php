@@ -1,4 +1,4 @@
-<?php
+<?php 
 namespace app\controllers;
 
 use system\Libraries\Template;
@@ -15,16 +15,16 @@ use app\dtos\MantenimientoDto;
 use app\models\MantenimientoModel;
 
 /**
- * 
+ *
  * @tutorial Working Class
  * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
  * @since {14/02/2017}
  */
 class MantenimientoController extends Controller
 {
-
+    
     /**
-     * 
+     *
      * @tutorial Method Description:
      * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
      * @since {14/02/2017}
@@ -38,9 +38,9 @@ class MantenimientoController extends Controller
         $this->module = 'mantenimiento';
         Lang::instance()->load($this->module);
     }
-
+    
     /**
-     * 
+     *
      * @tutorial Method Description:
      * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
      * @since {14/02/2017}
@@ -96,9 +96,9 @@ class MantenimientoController extends Controller
             Template::load($this->template, $this->module, $this->view, $this->_array);
         }
     }
-
+    
     /**
-     * 
+     *
      * @tutorial Method Description:
      * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
      * @since {17/01/2018}
@@ -110,16 +110,16 @@ class MantenimientoController extends Controller
         $oMenu = new \app\models\MenuModel();
         $this->_array['menu'] = $oMenu->getMenuHorizontal($sessionDto->getIdUsuario(), 59);
     }
-
+    
     /**
-     * 
+     *
      * @tutorial Method Description:
      * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
      * @since {14/02/2017}
      */
     public function inicio(){
         $this->view ="mantenimiento";
-        $this->object->setList_clientes_enum($this->model->getListClientesEnum());        
+        $this->object->setList_clientes_enum($this->model->getListClientesEnum());
     }
     
     /**
@@ -128,11 +128,12 @@ class MantenimientoController extends Controller
      * @since {23/05/2020}
      */
     public function buscar_equipos() {
-        $this->view ="mantenimiento";
+        $this->inicio();
+        $this->object->setList($this->model->getEquipos($this->object->getId_equipo(), $this->object->getId_cliente()));
     }
     
     /**
-     * 
+     *
      * @tutorial Method Description:
      * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
      * @since {14/02/2017}
@@ -150,7 +151,7 @@ class MantenimientoController extends Controller
     }
     
     /**
-     * 
+     *
      * @tutorial Method Description:
      * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
      * @since {14/02/2017}
@@ -165,7 +166,7 @@ class MantenimientoController extends Controller
     }
     
     /**
-     * 
+     *
      * @tutorial Method Description:
      * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
      * @since {14/02/2017}

@@ -83,6 +83,10 @@ class MantenimientoDto extends ADto
      * @var integer
      */
     private $id_cliente;
+    /**
+     *  @var string
+     */
+    private $search_equipo;
     
     /**
      * 
@@ -100,8 +104,7 @@ class MantenimientoDto extends ADto
         
         $this->equipoDto = new EquipoDto();
         $this->rhRepresentanteDto = new RhRepresentanteDto();
-        $this->servicioDto = new ServicioDto();
-        
+        $this->servicioDto = new ServicioDto();        
         $this->list_clientes_enum = new Arr();
     }
     
@@ -344,10 +347,4 @@ class MantenimientoDto extends ADto
     {
         $this->list_clientes_enum = $list_clientes_enum;
     }
-
-
-    
-    
-    
-
 }

@@ -90,6 +90,12 @@ class EquipoDto extends ADto
      * @var MarcaDto
      */
     protected $marcaDto;
+    
+    /**
+     * 
+     * @var ClienteSedeDto
+     */
+    protected $clienteSedeDto;
 
     /**
      *
@@ -108,7 +114,19 @@ class EquipoDto extends ADto
         $this->list_modelos_enum = array();
         $this->modeloDto = new ModeloDto();
         $this->marcaDto = new MarcaDto();
+        $this->clienteSedeDto = new ClienteSedeDto();
         parent::__construct();
+    }    
+    
+    /**
+     * 
+     */
+    public function getUbicacionEquipo() {
+        $title = "";
+        if (! Util::isVacio($this->clienteSedeDto)) {
+            $title =  $this->getClienteSedeDto()->getClienteDto()->getNombre_empresa()." (". $this->getClienteSedeDto()->getNombre()." )";
+        }
+        return $title;
     }
 
     /**
@@ -443,6 +461,22 @@ class EquipoDto extends ADto
     public function setMarcaDto($marcaDto)
     {
         $this->marcaDto = $marcaDto;
+    }       
+
+    /**
+     * @return the $clienteSedeDto
+     */
+    public function getClienteSedeDto()
+    {
+        return $this->clienteSedeDto;
+    }
+
+    /**
+     * @param \app\dtos\ClienteSedeDto $clienteSedeDto
+     */
+    public function setClienteSedeDto($clienteSedeDto)
+    {
+        $this->clienteSedeDto = $clienteSedeDto;
     }
 
     /**

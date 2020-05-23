@@ -7,6 +7,8 @@ use app\dtos\GastoDto;
 use app\dtos\ServicioDto;
 use app\dtos\ClienteDto;
 use app\enums\EnumGeneric;
+use app\dtos\EquipoDto;
+use app\dtos\ClienteSedeDto;
 /**
  * 
  * @tutorial Working Class
@@ -70,6 +72,82 @@ class MantenimientoModel
                 $result[$object->getId_cliente()] = $object;
             }
             
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+    /**
+     *
+     * @tutorial Method Description:
+     * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
+     * @since {23/05/2020}
+     */
+    public function getEquipos($serialC = null, $idCLienteC = null)
+    {
+        try {
+            $result = array();
+            $arrayParams = array();
+            $sql = " SELECT
+                        eqp.id_equipo,
+                        eqp.id_modelo,
+                        eqp.serial_equipo,
+                        eqp.descripcion,
+                        eqp.estado,
+                        mdl.tipo,
+                        mdl.modelo,
+                        mdl.estilo,
+                        mrc.id_marca,
+                        mrc.nombre,
+                        cls.id_cliente_sede,
+                        cls.nombre nombre_sede,
+                        clt.id_cliente,
+                        clt.nombre_empresa
+                     FROM equipo eqp
+                        INNER JOIN equipo_modelo mdl
+                            ON mdl.id_modelo = eqp.id_modelo
+                        INNER JOIN equipo_marca mrc
+                            ON mrc.id_marca = mdl.id_marca
+                        INNER JOIN cliente_sede_equipo cse
+                            ON cse.id_equipo = eqp.id_equipo
+                        INNER JOIN cliente_sede cls
+                            ON cls.id_cliente_sede = cse.id_cliente_sede
+                        INNER JOIN cliente clt
+                            ON cls.id_cliente = clt.id_cliente 
+                     WHERE 1 ";
+            
+            if (! Util::isVacio($serialC)) {
+                $sql .= " AND ( eqp.serial_equipo = :serialC  OR mdl.modelo = :serialC OR mrc.nombre = :serialC )";
+                $arrayParams[':serialC'] = $serialC;
+            }
+            
+            if (! Util::isVacio($idCLienteC)) {
+                $sql .= " AND clt.id_cliente = :idCLienteC ";
+                $arrayParams[':idCLienteC'] = $idCLienteC;
+            }
+            
+            $sql .= " ORDER BY mrc.id_marca, mdl.modelo, eqp.id_equipo ";
+            $statement = Doctrine::prepare($sql);
+            $statement->execute($arrayParams);
+            $list = $statement->fetchAll();
+            foreach ($list as $row) {
+                $object = new EquipoDto();
+                Util::setObjectRow($object, $row);
+                Util::setObjectRow($object->getModeloDto(), $row);
+                Util::setObjectRow($object->getMarcaDto(), $row);
+                
+                $clienteSede = new ClienteSedeDto();
+                $clienteSede->setId_cliente_sede($row['id_cliente_sede']);
+                $clienteSede->setNombre($row['nombre_sede']);
+                Util::setObjectRow($clienteSede->getClienteDto(),$row);
+                
+                $object->setClienteSedeDto($clienteSede);
+                
+                
+                $result[] = $object;
+            }
         } catch (\Exception $e) {
             throw $e;
         }

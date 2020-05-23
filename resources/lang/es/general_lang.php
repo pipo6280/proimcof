@@ -289,5 +289,6 @@ return [
      * | Errors
      * |---------
      */
-    'error_proccess_controller' => 'Se ha presentado un error en la petición realizada, intentelo nuevamente'
+    'error_proccess_controller' => 'Se ha presentado un error en la petición realizada, intentelo nuevamente',
+    'error_no_select_any_campo' =>'Debe selecionar un campo para realizar la busqueda'
 ];
