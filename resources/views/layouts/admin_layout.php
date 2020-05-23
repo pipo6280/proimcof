@@ -195,6 +195,7 @@ $sessionDto = $sessionDto instanceof SessionDto ? $sessionDto : new SessionDto()
             echo Html::script('js/plugins/framework/plugins.js');
             echo Html::script('js/plugins/chartJs/Chart.min.js');
         ?>
+        <script src="https://kit.fontawesome.com/9798ee6817.js" crossorigin="anonymous"></script>
         <script>
             <?php echo Message::viewMessages(); ?>
         </script>
