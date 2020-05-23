@@ -32,7 +32,7 @@ return [
     'birthday_customer_all' => 'Ver próximos cumpleaños',
     'birthday_customer_from' => 'Cliente desde: {0}',
     'birthday_customer_contact' => 'Contacto: {0}',
-    'welcome_to_app' => 'Bienvenido al <b>{0}</b>',
+    'welcome_to_app' => 'Bienvenido a <b>{0}</b>',
     'photo_profile' => 'public/img/perfil/{0}',
     'birthday_customer' => '{0} años',
     'contacts' => 'Contactos',

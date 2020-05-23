@@ -5,6 +5,8 @@ use system\Support\Util;
 use system\Core\Doctrine;
 use app\dtos\GastoDto;
 use app\dtos\ServicioDto;
+use app\dtos\ClienteDto;
+use app\enums\EnumGeneric;
 /**
  * 
  * @tutorial Working Class
@@ -14,81 +16,64 @@ use app\dtos\ServicioDto;
 class MantenimientoModel
 {
     /**
-     * 
+     * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
+     * @since {23/05/2020}
+     * @return \app\enums\EnumGeneric[]
+     */
+    public function getListClientesEnum() {        
+        $return = array();
+        $lista = $this->getListClientes(null, null);
+        foreach ($lista as $l) {
+            $return[] = new EnumGeneric($l->getId_cliente(), $l->getNombre_empresa());
+        }
+        return $return;
+    }
+        
+    /**
+     *
      * @tutorial Method Description:
      * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
-     * @since {14/02/2017}
+     * @since {22/01/2018}
+     * @param string $idClienteC
+     * @param string $nitC
+     * @throws Exception
+     * @return multitype:\app\dtos\ClienteDto
      */
-    public function getServicios($idServicioC = null) {
+    public function getListClientes($idClienteC = null, $nitC = null, $equiposC = false)
+    {
         try {
             $result = array();
+            $listIdSede = array();
             $arrayParams = array();
-            $sql = "SELECT srv.* FROM servicio srv WHERE 1 ";
-            if (! Util::isVacio($idServicioC)) {
-                $sql .= " AND srv.id_servicio = :idServicio ";
-                $arrayParams[':idServicio'] = $idServicioC;
+            $sql = 'SELECT
+                         clt.*
+                    FROM cliente clt
+                WHERE 1 ';
+            if (! Util::isVacio($idClienteC)) {
+                $sql .= " AND clt.id_cliente = :idClienteC ";
+                $arrayParams[':idClienteC'] = $idClienteC;
             }
-            $sql .= " ORDER BY srv.id_servicio DESC";
+            
+            if (! Util::isVacio($nitC)) {
+                $sql .= " AND clt.nit = :nitC ";
+                $arrayParams[':nitC'] = $nitC;
+            }
+            
             $statement = Doctrine::prepare($sql);
             $statement->execute($arrayParams);
             $list = $statement->fetchAll();
+            
             foreach ($list as $row) {
-                $object = new ServicioDto();
+                $object = new ClienteDto();
                 Util::setObjectRow($object, $row);
-                $result[] = $object;
+                Util::setObjectRow($object->getCiudadDto(), $row);                
+                $result[$object->getId_cliente()] = $object;
             }
+            
         } catch (\Exception $e) {
             throw $e;
         }
         return $result;
-    }
-    
-    /**
-     * 
-     * @tutorial Method Description:
-     * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
-     * @since {17/01/2018}
-     * @param ServicioDto $object
-     * @throws Exception
-     * @return Ambigous <boolean, number, unknown>
-     */
-    public function save(ServicioDto $object)
-    {
-        try {
-            $result = false;
-            $data['descripcion'] = $object->getDescripcion();
-            $data['fecha_registro'] = Util::fechaActual(true);
-            $data['yn_activo'] = $object->getYn_activo();
-            if (Util::isVacio($object->getId_servicio())) {
-                $result = Doctrine::insert('servicio', $data);
-            } else {
-                $result = Doctrine::update('servicio', $data, [
-                    'id_servicio' => $object->getId_servicio()
-                ]);
-            }
-        } catch (\Exception $e) {
-            throw $e;
-        }
-        return $result;
-    }
-    
-    /**
-     * 
-     * @tutorial Method Description:
-     * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
-     * @since {17/01/2018}
-     * @param unknown $idServicioC
-     * @return Ambigous <boolean, number, unknown>
-     */
-    public function setDeleteServicio($idServicioC)
-    {
-        $return = false; //
-        if (! Util::isVacio($idServicioC)) {
-            $return = Doctrine::delete('servicio', [
-                'id_servicio' => $idServicioC
-            ]);
-        }
-        return $return;
     }
     
 

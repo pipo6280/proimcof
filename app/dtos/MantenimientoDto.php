@@ -1,6 +1,8 @@
 <?php
 namespace app\dtos;
 
+use system\Support\Arr;
+
 /**
  * 
  * @author pipo
@@ -74,6 +76,20 @@ class MantenimientoDto extends ADto
      */    
     private $servicioDto;
     
+    /********************************************************************/
+   
+    /**
+     * 
+     * @var integer
+     */
+    private $id_cliente;
+    
+    /**
+     * 
+     * @var array
+     */
+    private $list_clientes_enum;
+    
     
     /**
      * 
@@ -85,6 +101,8 @@ class MantenimientoDto extends ADto
         $this->equipoDto = new EquipoDto();
         $this->rhRepresentanteDto = new RhRepresentanteDto();
         $this->servicioDto = new ServicioDto();
+        
+        $this->list_clientes_enum = new Arr();
     }
     
     
@@ -295,7 +313,40 @@ class MantenimientoDto extends ADto
     {
         $this->servicioDto = $servicioDto;
     }
+    /**
+     * @return the $id_cliente
+     */
+    public function getId_cliente()
+    {
+        return $this->id_cliente;
+    }
 
+    /**
+     * @param number $id_cliente
+     */
+    public function setId_cliente($id_cliente)
+    {
+        $this->id_cliente = $id_cliente;
+    }
+    
+    /**
+     * @return the $list_clientes_enum
+     */
+    public function getList_clientes_enum()
+    {
+        return $this->list_clientes_enum;
+    }
+
+    /**
+     * @param array $list_clientes_enum
+     */
+    public function setList_clientes_enum($list_clientes_enum)
+    {
+        $this->list_clientes_enum = $list_clientes_enum;
+    }
+
+
+    
     
     
 

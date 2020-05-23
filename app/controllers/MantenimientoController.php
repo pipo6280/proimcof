@@ -119,8 +119,16 @@ class MantenimientoController extends Controller
      */
     public function inicio(){
         $this->view ="mantenimiento";
-        $this->object->setList($this->model->getServicios());
-        
+        $this->object->setList_clientes_enum($this->model->getListClientesEnum());        
+    }
+    
+    /**
+     * @tutorial Method Description:
+     * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
+     * @since {23/05/2020}
+     */
+    public function buscar_equipos() {
+        $this->view ="mantenimiento";
     }
     
     /**

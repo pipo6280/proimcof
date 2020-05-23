@@ -2,9 +2,51 @@
 
 use system\Helpers\Form;
 use app\dtos\ServicioDto;
+use app\dtos\MantenimientoDto;
 
-$object = $object instanceof ServicioDto ? $object : new ServicioDto(); 
+$object = $object instanceof MantenimientoDto ? $object : new MantenimientoDto(); 
 ?>
+
+<?php echo Form::open(['action' => 'Mantenimiento@buscar_equipos', 'id' => 'frmBuscarEquipos']); ?>
+    <div class="ibox float-e-margins">
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-xs-12">
+                    <div class="form-group">
+                        <?php echo Form::label(lang('mantenimiento.cliente'), 'txtId_cliente'); ?>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fas fa-hotel"></i></span>
+                            <?php echo Form::selectEnum('txtId_cliente', $object->getId_cliente(), $object->getList_clientes_enum(),[
+                                'class' => 'form-control chosen-select ch'
+                            ]);?>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-xs-12">
+                    <div class="form-group">
+                        <?php echo Form::label(lang('mantenimiento.serial_equipo'), 'txtId_equipo'); ?>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fas fa-search"></i></span>
+                            <?php echo Form::text('txtId_equipo', $object->getId_equipo(), [
+                                'class' => 'form-control ch']
+                            );?>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-xs-12">
+                    <div class="form-group">
+                        <?php 
+                        echo Form::button(lang('general.search_button_icon'), [
+                            'class' => "ladda-button btn btn-info m-t-md pull-right {$object->getPermisoDto()->getIconEdit()}",
+                            'id' => 'btnBuscar',
+                            'type' => 'submit'
+                        ]); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php echo Form::close(); ?>
 
 <div class="ibox float-e-margins">
     <div class="ibox-title">
@@ -80,59 +122,5 @@ $object = $object instanceof ServicioDto ? $object : new ServicioDto();
     </div>
 </div>
 <script type="text/javascript">
-                        
-$('button#btnAddServicio,a.editServicio').click(function () {
-	var options = jQuery.extend({ id_servicio : null, nombre : null }, $(this).data());
-	var l = Ladda.create(this);
-    l.start();
-	Framework.setLoadData({
-		pagina: '<?php echo site_url('servicio/edit'); ?>',
-		data: { 
-    		txtId_servicio : options.id_servicio 
-        },
-		success: function (data) { 
-    		l.stop();
-    	}
-	});
-});
 
-$(document).ready(function () {
-    $('a.deleteServicio').each(function () {
-    	$(this).click(function () {
-    		var options = jQuery.extend({
-    			id_servicio : null,
-    			nombre : null 
-    		}, $(this).data());
-    		Framework.setConfirmar({
-    			contenido : 'Está a punto de eliminar el servicio: <b>'+ options.nombre +'</b> ¿Desea Continuar?',
-    			aceptar : function() {
-    				Framework.setLoadData({
-    					id_contenedor_body : false,
-    					pagina : '<?php echo site_url('servicio/delete'); ?>',
-    					data : {
-    						txtId_servicio : options.id_servicio
-    					},
-    					success : function(data) {
-    						if (data.contenido) {
-    							var message = '<?php echo lang('servicio.gasto_guardado_ok'); ?>';
-    	                    	message = message.replace('{0}', data.contenido);
-    	                        Framework.setSuccess(message);
-    							Framework.setLoadData({
-        							pagina : '<?php echo site_url('servicio/inicio'); ?>',
-    								data : {
-    									txtId_servicio : null
-    								}
-    							});
-    						} else {
-    							titulo = '<?php echo lang('servicio.no_delete'); ?>';
-    			    			titulo = titulo.replace('{0}', options.nombre);
-    							Framework.setError(titulo);
-    						}							
-    					}
-    				});
-    			}
-    		});
-        });
-    });
-});
 </script>
