@@ -245,6 +245,7 @@ return [
     'send_button' => 'Enviar',
     'login_in' => 'Ingresar',
     'sign_in' => 'Iniciar sesión',
+    'history_button' => 'Historial',
     'add_button_icon' => '<i class="fa fa-plus-square"></i>&nbsp;&nbsp;<span class="bold">Agregar</span>',
     'delete_button_icon' => '<span class="bold">Eliminar</span>',
     'edit_button_icon' => '{0} <span class="bold">Editar</span>',
@@ -270,6 +271,7 @@ return [
     'title_remove' => 'Clic aquí para remover {0}',
     'title_haga_clic' => 'Clic aquí para {0}',
     'title_button' => 'Click para {0}',
+    'title_history' => 'Clic aquí para ver el Historial de {0}',
     /*
      * |---------
      * | Messages

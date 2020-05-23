@@ -330,8 +330,24 @@ class MantenimientoDto extends ADto
     public function setId_cliente($id_cliente)
     {
         $this->id_cliente = $id_cliente;
-    }
+    }       
     
+    /**
+     * @return the $search_equipo
+     */
+    public function getSearch_equipo()
+    {
+        return $this->search_equipo;
+    }
+
+    /**
+     * @param string $search_equipo
+     */
+    public function setSearch_equipo($search_equipo)
+    {
+        $this->search_equipo = $search_equipo;
+    }
+
     /**
      * @return the $list_clientes_enum
      */

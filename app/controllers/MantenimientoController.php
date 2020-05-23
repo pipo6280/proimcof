@@ -129,7 +129,7 @@ class MantenimientoController extends Controller
      */
     public function buscar_equipos() {
         $this->inicio();
-        $this->object->setList($this->model->getEquipos($this->object->getId_equipo(), $this->object->getId_cliente()));
+        $this->object->setList($this->model->getEquipos($this->object->getSearch_equipo(), $this->object->getId_cliente()));
     }
     
     /**

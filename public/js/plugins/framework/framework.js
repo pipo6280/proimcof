@@ -937,7 +937,7 @@ Framework = function() {
 		setDataTable: function (options) {
 			var options = jQuery.extend({
 				responsive : true,
-				pageLength : 10,
+				pageLength : 25,
 				object: null,
 				buttons: true,
 				language : {

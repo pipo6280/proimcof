@@ -56,19 +56,8 @@ $object = $object instanceof MantenimientoDto ? $object : new MantenimientoDto()
         </h5>
     </div>
     <div class="ibox-content">
-        <div class="pull-right">
-            <?php 
-                echo Form::button(lang('general.add_button_icon'), [
-                    'class' => "ladda-button ladda-button-demo btn btn-outline btn-success {$object->getPermisoDto()->getIconAdd()}",
-                    'data-id_servicio' => null,
-                    'data-nombre' => null,
-                    'id' => 'btnAddServicio'
-                ]);
-            ?>
-        </div>
-        <div class="clearfix"></div>
         <div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover datatable" >
+            <table class="table table-striped table-bordered table-hover datatable" pageLength="25" >
                 <thead>
                     <tr>
                         <th>
@@ -86,6 +75,9 @@ $object = $object instanceof MantenimientoDto ? $object : new MantenimientoDto()
                         <th class="text-center nosort">
                             <?php echo lang('general.edit_button'); ?>
                         </th>
+                        <th class="text-center nosort">
+                            <?php echo lang('general.history_button'); ?>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -100,17 +92,22 @@ $object = $object instanceof MantenimientoDto ? $object : new MantenimientoDto()
                                 <td class="text-center ">
                                     <?php echo $lis->getNombreEquipo(); ?>
                                 </td>
-                                <td class="text-center ">
-                                    <?php echo $lis->getNombreEquipo(); ?>
+                                <td class="text-center ">                                 
+                                    <?php echo $lis->getUbicacionEquipo(); ?>
                                 </td>
                                 <td class="text-center ">
                                     <?php echo $lis->getTitleEstado(); ?>
                                 </td>
                                 <td class="text-center" >
-                                   <a href="javascript:void(0)" class="editServicio <?php echo $object->getPermisoDto()->getIconEdit(); ?>" data-id_servicio="<?php echo $lis->getId_equipo(); ?>" data-nombre="<?php echo $lis->getNombreEquipo(); ?>" data-toggle="tooltip" title="<?php echo lang('general.title_edit', [$lis->getNombreEquipo()]); ?>">
+                                   <a href="#" class="editMantenimiento <?php echo $object->getPermisoDto()->getIconEdit(); ?>" data-id_equipo="<?php echo $lis->getId_equipo(); ?>" data-id_cliente="<?php echo $lis->getClienteSedeDto()->getClienteDto()->getId_cliente(); ?>" data-nombre="<?php echo $lis->getNombreEquipo(); ?>" data-toggle="tooltip" title="<?php echo lang('general.title_edit', [$lis->getNombreEquipo()]); ?>">
                                         <i class=" <?php echo $object->getPermisoDto()->getClassEdit(); ?> fa-2x"></i>
                                    </a>
-                                </td>                                
+                                </td>  
+                                <td class="text-center" >
+                                   <a href="#" class="historyMantenimiento <?php echo $object->getPermisoDto()->getIconEdit(); ?>" data-id_equipo="<?php echo $lis->getId_equipo(); ?>" data-nombre="<?php echo $lis->getNombreEquipo(); ?>" data-toggle="tooltip" title="<?php echo lang('general.title_history', [$lis->getNombreEquipo()]); ?>">
+                                        <i class="fas fa-history fa-2x"></i>
+                                   </a>
+                                </td>                               
                             </tr>
                             <?php $count++;?>
                         <?php } ?>

@@ -119,8 +119,8 @@ class MantenimientoModel
                      WHERE 1 ";
             
             if (! Util::isVacio($serialC)) {
-                $sql .= " AND ( eqp.serial_equipo = :serialC  OR mdl.modelo = :serialC OR mrc.nombre = :serialC )";
-                $arrayParams[':serialC'] = $serialC;
+                $sql .= " AND ( eqp.serial_equipo LIKE '%".$serialC."%'  OR mdl.modelo LIKE '%".$serialC."%' OR mrc.nombre LIKE '%".$serialC."%' )";
+                //$arrayParams[":serialC"] = ;
             }
             
             if (! Util::isVacio($idCLienteC)) {
@@ -130,6 +130,7 @@ class MantenimientoModel
             
             $sql .= " ORDER BY mrc.id_marca, mdl.modelo, eqp.id_equipo ";
             $statement = Doctrine::prepare($sql);
+            //echo $sql;
             $statement->execute($arrayParams);
             $list = $statement->fetchAll();
             foreach ($list as $row) {

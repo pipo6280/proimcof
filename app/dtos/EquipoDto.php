@@ -123,7 +123,7 @@ class EquipoDto extends ADto
      */
     public function getUbicacionEquipo() {
         $title = "";
-        if (! Util::isVacio($this->clienteSedeDto)) {
+        if ($this->clienteSedeDto !=null) {
             $title =  $this->getClienteSedeDto()->getClienteDto()->getNombre_empresa()." (". $this->getClienteSedeDto()->getNombre()." )";
         }
         return $title;
