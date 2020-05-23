@@ -20,8 +20,7 @@ $sessionDto = $sessionDto instanceof SessionDto ? $sessionDto : new SessionDto()
     		
             echo Html::meta('description', lang('general.description'));
     		echo Html::meta('keywords', lang('general.keywords'));
-    		echo Html::meta('author', lang('general.company_name'));
-    		
+    		echo Html::meta('author', lang('general.company_name'));    		
     		echo Html::style('css/bootstrap.min.css');
     		echo Html::style('font-awesome/css/font-awesome.css');    		
     		echo Html::style('css/plugins/sweetalert/sweetalert.css');
