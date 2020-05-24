@@ -96,6 +96,12 @@ class MantenimientoDto extends ADto
     
     
     /**
+     *
+     * @var array
+     */
+    private $list_servicios_enum;
+    
+    /**
      * 
      */
     public function __construct()
@@ -105,7 +111,9 @@ class MantenimientoDto extends ADto
         $this->equipoDto = new EquipoDto();
         $this->rhRepresentanteDto = new RhRepresentanteDto();
         $this->servicioDto = new ServicioDto();        
+        
         $this->list_clientes_enum = new Arr();
+        $this->list_servicios_enum = new Arr();
     }
     
     
@@ -363,4 +371,20 @@ class MantenimientoDto extends ADto
     {
         $this->list_clientes_enum = $list_clientes_enum;
     }
+    /**
+     * @return the $list_servicios_enum
+     */
+    public function getList_servicios_enum()
+    {
+        return $this->list_servicios_enum;
+    }
+
+    /**
+     * @param array $list_servicios_enum
+     */
+    public function setList_servicios_enum($list_servicios_enum)
+    {
+        $this->list_servicios_enum = $list_servicios_enum;
+    }
+    
 }

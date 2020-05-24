@@ -5,6 +5,7 @@ use system\Support\Util;
 use system\Core\Doctrine;
 use app\dtos\GastoDto;
 use app\dtos\ServicioDto;
+use app\enums\EnumGeneric;
 /**
  * 
  * @tutorial Working Class
@@ -13,6 +14,21 @@ use app\dtos\ServicioDto;
  */
 class ServicioModel
 {
+    
+    /**
+     * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
+     * @since {23/05/2020}
+     * @return \app\enums\EnumGeneric[]
+     */
+    public function getListServiciosEnum() {
+        $return = array();
+        $lista = $this->getServicios(null);
+        foreach ($lista as $l) {
+            $return[] = new EnumGeneric($l->getId_servicio(), $l->getDescripcion());
+        }
+        return $return;
+    }
+    
     /**
      * 
      * @tutorial Method Description:

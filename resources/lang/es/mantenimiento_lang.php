@@ -1,13 +1,14 @@
 <?php
 return [
     'add_form' => 'Formulario - Registrar Servicio Técnico',
-    'edit_form' => 'Formulario - Editar Servicio Técnico',
+    'edit_form' => 'Formulario - Crear Registro Servicio Técnico',
     'form_search' => 'Servicio Técnico',
     
     'cliente' => 'Cliente',
     'serial_equipo' => 'Serial Equipo',
     'ubicacion' => 'Cliente / Ubicacion',
     'equipo' => 'Equipo',
+    'servicios' => 'Servicios',
     
     'descripcion' => 'Descripción',
     'activo' => 'Activo',

@@ -45,7 +45,7 @@ $object = $object instanceof MantenimientoDto ? $object : new MantenimientoDto()
                     </div>
                 </div>
             </div>
-        </div>
+        </div>        
     </div>
 <?php echo Form::close(); ?>
 
@@ -99,7 +99,7 @@ $object = $object instanceof MantenimientoDto ? $object : new MantenimientoDto()
                                     <?php echo $lis->getTitleEstado(); ?>
                                 </td>
                                 <td class="text-center" >
-                                   <a href="#" class="editMantenimiento <?php echo $object->getPermisoDto()->getIconEdit(); ?>" data-id_equipo="<?php echo $lis->getId_equipo(); ?>" data-id_cliente="<?php echo $lis->getClienteSedeDto()->getClienteDto()->getId_cliente(); ?>" data-nombre="<?php echo $lis->getNombreEquipo(); ?>" data-toggle="tooltip" title="<?php echo lang('general.title_edit', [$lis->getNombreEquipo()]); ?>">
+                                   <a href="#" class="editMantenimiento <?php echo $object->getPermisoDto()->getIconEdit(); ?>" data-id_equipo="<?php echo $lis->getId_equipo(); ?>" data-id_cliente="<?php echo $lis->getClienteSedeDto()->getClienteDto()->getId_cliente(); ?>" data-nombre="<?php echo $lis->getNombreEquipo(); ?>" data-search_equipo="<?php echo $object->getSearch_equipo()?>" data-toggle="tooltip" title="<?php echo lang('general.title_edit', [$lis->getNombreEquipo()]); ?>">
                                         <i class=" <?php echo $object->getPermisoDto()->getClassEdit(); ?> fa-2x"></i>
                                    </a>
                                 </td>  
@@ -119,6 +119,19 @@ $object = $object instanceof MantenimientoDto ? $object : new MantenimientoDto()
 </div>
 <script type="text/javascript">
     $(function(){
+    	$('a.editMantenimiento').click(function () {
+    		var options = jQuery.extend({ id_equipo : null, id_cliente : null, search_equipo : null}, $(this).data());
+    		//var l = Ladda.create(this);
+    	    //l.start();
+    		Framework.setLoadData({
+    			pagina: '<?php echo site_url('mantenimiento/edit'); ?>',
+    			data: { 
+    				txtSearch_equipo: options.search_equipo,
+    	    		txtId_equipo : options.id_equipo,
+    	    		txtId_cliente : options.id_cliente 
+    	        },    			
+    		});
+    	});
 
     	$('button#btnBuscar').click(function () {
     		BUTTON_CLICK = this;
@@ -157,7 +170,6 @@ $object = $object instanceof MantenimientoDto ? $object : new MantenimientoDto()
     			}
     		});
     	};
-
 		    	
     });
 </script>

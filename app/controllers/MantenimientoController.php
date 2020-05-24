@@ -13,6 +13,7 @@ use system\Support\Arr;
 use app\dtos\ServicioDto;
 use app\dtos\MantenimientoDto;
 use app\models\MantenimientoModel;
+use app\models\ServicioModel;
 
 /**
  *
@@ -22,6 +23,8 @@ use app\models\MantenimientoModel;
  */
 class MantenimientoController extends Controller
 {
+    
+    private $servicioModel = null;
     
     /**
      *
@@ -34,6 +37,7 @@ class MantenimientoController extends Controller
         parent::__construct();
         $this->object = new MantenimientoDto();
         $this->model = new MantenimientoModel();
+        $this->servicioModel = new ServicioModel();
         $this->template = 'admin';
         $this->module = 'mantenimiento';
         Lang::instance()->load($this->module);
@@ -140,14 +144,16 @@ class MantenimientoController extends Controller
      */
     public function edit()
     {
-        $this->view = 'edit';
-        $dto = new ServicioDto();
-        if (Persistir::getParam('txtId_servicio')) {
-            $dto = $this->model->getServicios(Persistir::getParam('txtId_servicio'));
-            $dto = ! Util::isVacio($dto) ? Arr::current($dto) : new ServicioDto();
-        }
+        $this->view = 'registro';
+        //$dto = new MantenimientoDto();
+        //if (Persistir::getParam('txtId_equipo')) {
+            $this->object->setList_servicios_enum($this->servicioModel->getListServiciosEnum(null));
+            
+//             $dto = $this->model->getServicios(Persistir::getParam('txtId_servicio'));
+//             $dto = ! Util::isVacio($dto) ? Arr::current($dto) : new ServicioDto();
+        //}
         
-        $this->object->setDto($dto);
+//         $this->object->setDto($dto);
     }
     
     /**
