@@ -57,23 +57,23 @@ $object = $object instanceof MantenimientoDto ? $object : new MantenimientoDto()
     </div>
     <div class="ibox-content">
         <div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover datatable" pageLength="25" >
+            <table class="table table-striped table-bordered table-hover datatable">
                 <thead>
                     <tr>
                         <th>
                             #
                         </th>
-                        <th>
-                            <?php echo lang('servicio.descripcion'); ?>
+                        <th class="text-center ">
+                            <?php echo lang('mantenimiento.equipo'); ?>
                         </th>
-                        <th>
-                            <?php echo lang('servicio.descripcion'); ?>
+                        <th class="text-center " >        
+                            <?php echo lang('mantenimiento.ubicacion'); ?>
                         </th>
                         <th class="text-center ">
-                            <?php echo lang('servicio.activo'); ?>
+                            <?php echo lang('mantenimiento.estado'); ?>
                         </th>
                         <th class="text-center nosort">
-                            <?php echo lang('general.edit_button'); ?>
+                            <?php echo lang('mantenimiento.registrar'); ?>
                         </th>
                         <th class="text-center nosort">
                             <?php echo lang('general.history_button'); ?>
