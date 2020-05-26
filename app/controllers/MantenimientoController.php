@@ -14,6 +14,7 @@ use app\dtos\ServicioDto;
 use app\dtos\MantenimientoDto;
 use app\models\MantenimientoModel;
 use app\models\ServicioModel;
+use app\models\EquipoModel;
 
 /**
  *
@@ -25,6 +26,8 @@ class MantenimientoController extends Controller
 {
     
     private $servicioModel = null;
+    
+    //private $equipoModel = null;
     
     /**
      *
@@ -38,6 +41,7 @@ class MantenimientoController extends Controller
         $this->object = new MantenimientoDto();
         $this->model = new MantenimientoModel();
         $this->servicioModel = new ServicioModel();
+        //$this->equipoModel= new EquipoModel();
         $this->template = 'admin';
         $this->module = 'mantenimiento';
         Lang::instance()->load($this->module);
@@ -140,20 +144,18 @@ class MantenimientoController extends Controller
      *
      * @tutorial Method Description:
      * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
-     * @since {14/02/2017}
+     * @since {25/05/2020}
      */
     public function edit()
     {
         $this->view = 'registro';
-        //$dto = new MantenimientoDto();
-        //if (Persistir::getParam('txtId_equipo')) {
-            $this->object->setList_servicios_enum($this->servicioModel->getListServiciosEnum(null));
-            
-//             $dto = $this->model->getServicios(Persistir::getParam('txtId_servicio'));
-//             $dto = ! Util::isVacio($dto) ? Arr::current($dto) : new ServicioDto();
-        //}
+        $this->object->setList_servicios_enum($this->servicioModel->getListServiciosEnum(null));
+        $lisEquipos = $this->model->getEquipos(null, null, $this->object->getId_equipo());
         
-//         $this->object->setDto($dto);
+        foreach ($lisEquipos as $equipo) {
+            $this->object->setEquipoDto($equipo);
+        }
+
     }
     
     /**
@@ -164,25 +166,11 @@ class MantenimientoController extends Controller
      */
     public function save() {
         $this->_array['contenido'] = false;
-        $this->object->setDto(new ServicioDto());
-        Persistir::postADto($this->object);
-        if (! Util::isVacio($this->object->getDto()->getDescripcion())) {
-            $this->_array['contenido'] = $this->model->save($this->object->getDto());
+
+        if (! Util::isVacio($this->object->getDescripcion()) && ! Util::isVacio($this->object->getId_servicio()) ) {
+            $this->_array['contenido'] = $this->model->save($this->object);
         }
     }
     
-    /**
-     *
-     * @tutorial Method Description:
-     * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
-     * @since {14/02/2017}
-     */
-    public function delete()
-    {
-        $this->_array['contenido'] = false;
-        if (Persistir::getParam('txtId_servicio')) {
-            $this->_array['contenido'] = $this->model->setDeleteServicio(Persistir::getParam('txtId_servicio'));
-        }
-    }
     
 }

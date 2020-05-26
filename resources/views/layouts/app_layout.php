@@ -29,7 +29,7 @@ global $userMenu; ?>
     		
     		// Bootstrap
     		echo Html::style('plugins/bootstrap/css/bootstrap.min.css');
-    		echo Html::style('fonts/font-awesome/css/font-awesome.css');
+    		//echo Html::style('fonts/font-awesome/css/font-awesome.css');
     		echo Html::style('fonts/fontello/css/fontello.css');
     		
     		echo Html::style('plugins/magnific-popup/magnific-popup.css');

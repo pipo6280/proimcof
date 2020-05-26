@@ -99,7 +99,7 @@ $object = $object instanceof MantenimientoDto ? $object : new MantenimientoDto()
                                     <?php echo $lis->getTitleEstado(); ?>
                                 </td>
                                 <td class="text-center" >
-                                   <a href="#" class="editMantenimiento <?php echo $object->getPermisoDto()->getIconEdit(); ?>" data-id_equipo="<?php echo $lis->getId_equipo(); ?>" data-id_cliente="<?php echo $lis->getClienteSedeDto()->getClienteDto()->getId_cliente(); ?>" data-nombre="<?php echo $lis->getNombreEquipo(); ?>" data-search_equipo="<?php echo $object->getSearch_equipo()?>" data-toggle="tooltip" title="<?php echo lang('general.title_edit', [$lis->getNombreEquipo()]); ?>">
+                                   <a href="#" class="editMantenimiento <?php echo $object->getPermisoDto()->getIconEdit(); ?>" data-id_equipo="<?php echo $lis->getId_equipo(); ?>" data-id_cliente="<?php echo $object->getId_cliente(); ?>" data-nombre="<?php echo $lis->getNombreEquipo(); ?>" data-search_equipo="<?php echo $object->getSearch_equipo()?>" data-toggle="tooltip" title="<?php echo lang('general.title_edit', [$lis->getNombreEquipo()]); ?>">
                                         <i class=" <?php echo $object->getPermisoDto()->getClassEdit(); ?> fa-2x"></i>
                                    </a>
                                 </td>  

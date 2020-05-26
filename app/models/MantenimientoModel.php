@@ -9,6 +9,8 @@ use app\dtos\ClienteDto;
 use app\enums\EnumGeneric;
 use app\dtos\EquipoDto;
 use app\dtos\ClienteSedeDto;
+use app\dtos\MantenimientoDto;
+use app\dtos\RhRepresentanteDto;
 /**
  * 
  * @tutorial Working Class
@@ -83,9 +85,48 @@ class MantenimientoModel
      *
      * @tutorial Method Description:
      * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
+     * @since {25/05/2020}
+     */
+    private function getRepresentanteIdPersona($idPersona = null) {
+        
+        try {
+            $result = null;
+            $listIdSede = array();
+            $arrayParams = array();
+            $sql = 'SELECT
+                         rpt.*
+                    FROM rh_representante rpt
+                WHERE 1 ';
+            if (! Util::isVacio($idPersona)) {
+                $sql .= " AND rpt.id_persona = :idPersona ";
+                $arrayParams[':idPersona'] = $idPersona;
+            }
+            
+            $statement = Doctrine::prepare($sql);
+            $statement->execute($arrayParams);
+            $list = $statement->fetchAll();
+            
+            foreach ($list as $row) {
+                $object = new RhRepresentanteDto();
+                Util::setObjectRow($object, $row);
+                //Util::setObjectRow($object->getCiudadDto(), $row);
+                $result = $object;
+            }
+            
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return $result;
+        
+    }
+    
+    /**
+     *
+     * @tutorial Method Description:
+     * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
      * @since {23/05/2020}
      */
-    public function getEquipos($serialC = null, $idCLienteC = null)
+    public function getEquipos($serialC = null, $idCLienteC = null, $idEquipoC = null)
     {
         try {
             $result = array();
@@ -128,6 +169,11 @@ class MantenimientoModel
                 $arrayParams[':idCLienteC'] = $idCLienteC;
             }
             
+            if (! Util::isVacio($idEquipoC)) {
+                $sql .= " AND eqp.id_equipo = :idEquipoC ";
+                $arrayParams[':idEquipoC'] = $idEquipoC;
+            }
+            
             $sql .= " ORDER BY mrc.id_marca, mdl.modelo, eqp.id_equipo ";
             $statement = Doctrine::prepare($sql);
             //echo $sql;
@@ -148,6 +194,41 @@ class MantenimientoModel
                 
                 
                 $result[] = $object;
+            }
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    /**
+     * 
+     * @param ServicioDto $object
+     * @throws Exception
+     * @return boolean|number
+     */
+    public function save(MantenimientoDto $object)
+    {
+        try {
+            $result = false;
+            $representante = $this->getRepresentanteIdPersona(Util::userSessionDto()->getPersonaDto()->getId_persona());
+            $data['descripcion'] = $object->getDescripcion();
+            $data['pendientes'] = $object->getPendientes();
+            $data['fecha'] = Util::fecha($object->getFecha());
+            $data['id_equipo'] = $object->getId_equipo();
+            $data['id_servicio'] = $object->getId_servicio();
+            $data['id_representante'] = $representante->getId_representante();
+            
+            if (Util::isVacio($object->getId_mantenimiento())) {
+                $data['id_usuario_registra'] = Util::userSessionDto()->getIdUsuario();
+                $data['fecha_registro'] = Util::fechaActual(true);
+                $result = Doctrine::insert('mantenimiento', $data);
+            } else {
+                $data['id_usuario_modifica'] = Util::userSessionDto()->getIdUsuario();
+                $data['fecha_modifica'] = Util::fechaActual(true);
+                $result = Doctrine::update('mantenimiento', $data, [
+                    'id_mantenimiento' => $object->getId_mantenimiento()
+                ]);
             }
         } catch (\Exception $e) {
             throw $e;

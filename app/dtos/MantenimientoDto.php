@@ -36,6 +36,12 @@ class MantenimientoDto extends ADto
      * @var string
      */
     private $descripcion;
+    
+    /**
+     *
+     * @var string
+     */
+    private $pendientes;
     /**
      *
      * @var \DateTime
@@ -93,8 +99,7 @@ class MantenimientoDto extends ADto
      * @var array
      */
     private $list_clientes_enum;
-    
-    
+        
     /**
      *
      * @var array
@@ -115,8 +120,6 @@ class MantenimientoDto extends ADto
         $this->list_clientes_enum = new Arr();
         $this->list_servicios_enum = new Arr();
     }
-    
-    
     /**
      * @return the $id_mantenimiento
      */
@@ -155,6 +158,14 @@ class MantenimientoDto extends ADto
     public function getDescripcion()
     {
         return $this->descripcion;
+    }
+
+    /**
+     * @return the $pendientes
+     */
+    public function getPendientes()
+    {
+        return $this->pendientes;
     }
 
     /**
@@ -222,6 +233,38 @@ class MantenimientoDto extends ADto
     }
 
     /**
+     * @return the $id_cliente
+     */
+    public function getId_cliente()
+    {
+        return $this->id_cliente;
+    }
+
+    /**
+     * @return the $search_equipo
+     */
+    public function getSearch_equipo()
+    {
+        return $this->search_equipo;
+    }
+
+    /**
+     * @return the $list_clientes_enum
+     */
+    public function getList_clientes_enum()
+    {
+        return $this->list_clientes_enum;
+    }
+
+    /**
+     * @return the $list_servicios_enum
+     */
+    public function getList_servicios_enum()
+    {
+        return $this->list_servicios_enum;
+    }
+
+    /**
      * @param number $id_mantenimiento
      */
     public function setId_mantenimiento($id_mantenimiento)
@@ -259,6 +302,14 @@ class MantenimientoDto extends ADto
     public function setDescripcion($descripcion)
     {
         $this->descripcion = $descripcion;
+    }
+
+    /**
+     * @param string $pendientes
+     */
+    public function setPendientes($pendientes)
+    {
+        $this->pendientes = $pendientes;
     }
 
     /**
@@ -324,13 +375,6 @@ class MantenimientoDto extends ADto
     {
         $this->servicioDto = $servicioDto;
     }
-    /**
-     * @return the $id_cliente
-     */
-    public function getId_cliente()
-    {
-        return $this->id_cliente;
-    }
 
     /**
      * @param number $id_cliente
@@ -338,14 +382,6 @@ class MantenimientoDto extends ADto
     public function setId_cliente($id_cliente)
     {
         $this->id_cliente = $id_cliente;
-    }       
-    
-    /**
-     * @return the $search_equipo
-     */
-    public function getSearch_equipo()
-    {
-        return $this->search_equipo;
     }
 
     /**
@@ -357,26 +393,11 @@ class MantenimientoDto extends ADto
     }
 
     /**
-     * @return the $list_clientes_enum
-     */
-    public function getList_clientes_enum()
-    {
-        return $this->list_clientes_enum;
-    }
-
-    /**
      * @param array $list_clientes_enum
      */
     public function setList_clientes_enum($list_clientes_enum)
     {
         $this->list_clientes_enum = $list_clientes_enum;
-    }
-    /**
-     * @return the $list_servicios_enum
-     */
-    public function getList_servicios_enum()
-    {
-        return $this->list_servicios_enum;
     }
 
     /**
@@ -386,5 +407,9 @@ class MantenimientoDto extends ADto
     {
         $this->list_servicios_enum = $list_servicios_enum;
     }
+
+    
+    
+     
     
 }
