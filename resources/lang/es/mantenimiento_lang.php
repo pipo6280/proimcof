@@ -3,6 +3,7 @@ return [
     'add_form' => 'Formulario - Registrar Servicio Técnico',
     'edit_form' => 'Formulario - Crear Registro Servicio Técnico',
     'form_search' => 'Servicio Técnico',
+    'form_historial' => 'Historial Servicio Técnico',
     
     'cliente' => 'Cliente',
     'serial_equipo' => 'Serial Equipo',

@@ -70,7 +70,12 @@ class MantenimientoDto extends ADto
     /**
      *  @var RhRepresentanteDto
      */
-    private $rhRepresentanteDto;
+    private $rhRepresentanteDto;    
+    /**
+     * 
+     * @var PersonaDto
+     */
+    private $personaDto;
     /**
      * 
      * @var EquipoDto
@@ -106,6 +111,13 @@ class MantenimientoDto extends ADto
      */
     private $list_servicios_enum;
     
+    
+    /**
+     * 
+     * @var array
+     */
+    private $list_mantenimientos;
+    
     /**
      * 
      */
@@ -115,10 +127,12 @@ class MantenimientoDto extends ADto
         
         $this->equipoDto = new EquipoDto();
         $this->rhRepresentanteDto = new RhRepresentanteDto();
-        $this->servicioDto = new ServicioDto();        
+        $this->servicioDto = new ServicioDto();
+        $this->personaDto = new PersonaDto();
         
         $this->list_clientes_enum = new Arr();
         $this->list_servicios_enum = new Arr();
+        $this->list_mantenimientos = new Arr();
     }
     /**
      * @return the $id_mantenimiento
@@ -407,6 +421,38 @@ class MantenimientoDto extends ADto
     {
         $this->list_servicios_enum = $list_servicios_enum;
     }
+    /**
+     * @return the $personaDto
+     */
+    public function getPersonaDto()
+    {
+        return $this->personaDto;
+    }
+
+    /**
+     * @param \app\dtos\PersonaDto $personaDto
+     */
+    public function setPersonaDto($personaDto)
+    {
+        $this->personaDto = $personaDto;
+    }
+    /**
+     * @return the $list_mantenimientos
+     */
+    public function getList_mantenimientos()
+    {
+        return $this->list_mantenimientos;
+    }
+
+    /**
+     * @param array $list_mantenimientos
+     */
+    public function setList_mantenimientos($list_mantenimientos)
+    {
+        $this->list_mantenimientos = $list_mantenimientos;
+    }
+
+
 
     
     

@@ -3,7 +3,6 @@ namespace app\models;
 
 use system\Support\Util;
 use system\Core\Doctrine;
-use app\dtos\GastoDto;
 use app\dtos\ServicioDto;
 use app\dtos\ClienteDto;
 use app\enums\EnumGeneric;
@@ -111,6 +110,65 @@ class MantenimientoModel
                 Util::setObjectRow($object, $row);
                 //Util::setObjectRow($object->getCiudadDto(), $row);
                 $result = $object;
+            }
+            
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return $result;
+        
+    }
+    
+    
+    /**
+     * 
+     * @param unknown $idEquipo
+     * @throws Exception
+     * @return array|\app\dtos\MantenimientoDto
+     */
+    public function getListMantenimientos($idEquipo = null) {
+        
+        try {
+            $result = array();            
+            $arrayParams = array();
+            $sql = 'SELECT
+                        mnt.*,
+                        srv.id_servicio,
+                        srv.descripcion descripcion_servicio,
+                        prs.id_persona,
+                        prs.primer_nombre,
+                        prs.segundo_nombre,
+                        prs.primer_apellido,
+                        prs.segundo_apellido
+                    FROM mantenimiento mnt 
+                    INNER JOIN servicio srv ON mnt.id_servicio = srv.id_servicio
+                    INNER JOIN rh_representante rpt ON mnt.id_representante = rpt.id_representante
+                    INNER JOIN persona prs ON rpt.id_persona = prs.id_persona
+                WHERE 1 ';
+            
+            if (! Util::isVacio($idEquipo)) {
+                $sql .= " AND mnt.id_equipo = :idEquipo ";
+                $arrayParams[':idEquipo'] = $idEquipo;
+            }
+            
+            $sql .= " ORDER BY mnt.fecha DESC";
+            
+            $statement = Doctrine::prepare($sql);
+            $statement->execute($arrayParams);
+            $list = $statement->fetchAll();
+            
+            foreach ($list as $row) {
+                $object = new MantenimientoDto();
+                Util::setObjectRow($object, $row);
+                Util::setObjectRow($object->getPersonaDto(), $row);
+                
+                $servicio = new ServicioDto();
+                $servicio->setId_servicio($row['id_servicio']);
+                $servicio->setDescripcion($row['descripcion_servicio']);
+                
+                $object->setServicioDto($servicio);
+                
+                $result[] = $object;
             }
             
         } catch (\Exception $e) {

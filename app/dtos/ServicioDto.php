@@ -24,6 +24,12 @@ class ServicioDto extends ADto
      * @var string
      */
     protected $descripcion;
+    
+    /**
+     * 
+     * @var string
+     */
+    protected $class_icon;
 
     /**
      *
@@ -392,4 +398,37 @@ class ServicioDto extends ADto
     {
         $this->fecha_registro = $fecha_registro;
     }
+    
+    /**
+     * @return the $class_icon
+     */
+    public function getClass_icon()
+    {
+        return $this->class_icon;
+    }
+
+    /**
+     * @return the $listControles
+     */
+    public function getListControles()
+    {
+        return $this->listControles;
+    }
+
+    /**
+     * @param string $class_icon
+     */
+    public function setClass_icon($class_icon)
+    {
+        $this->class_icon = $class_icon;
+    }
+
+    /**
+     * @param array $listControles
+     */
+    public function setListControles($listControles)
+    {
+        $this->listControles = $listControles;
+    }       
+    
 }

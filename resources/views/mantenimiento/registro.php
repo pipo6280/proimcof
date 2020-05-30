@@ -3,12 +3,14 @@
 //use system\Support\Util;
 use system\Helpers\Form;
 use app\dtos\MantenimientoDto;
+use system\Support\Util;
+use app\enums\EDateFormat;
 
 $object = $object instanceof MantenimientoDto ? $object : new MantenimientoDto(); 
 //$object->getDto()->setYn_activo(Util::isVacio($object->getDto()->getYn_activo()) ? ESiNo::index(ESiNo::SI)->getId() : $object->getDto()->getYn_activo()); ?>
 <?php echo Form::open(['action' => 'Mantenimiento@save', 'id' => 'frmEditMantenimiento']); ?>
  <div class="row">
-    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">       
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">       
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h4 class="media-heading">
@@ -90,6 +92,45 @@ $object = $object instanceof MantenimientoDto ? $object : new MantenimientoDto()
             </div>
         </div>
     </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">       
+        <div class="ibox float-e-margins">
+             <div class="ibox-title">
+             	<h4 class="media-heading"><?php echo lang('mantenimiento.form_historial') ?></h4> 
+             </div>
+             <div class="ibox-content"> 
+             	<div class="scroller">   
+                    <?php foreach ($object->getList_mantenimientos() as $mant) { ?>
+                    	<?php $mant instanceof MantenimientoDto ?>
+                        <div id="vertical-timeline" class="vertical-container dark-timeline" >                                      
+                            <div class="vertical-timeline-block">
+                                <div class="vertical-timeline-icon blue-bg">
+                                    <i class="fas fa-tools"></i>                            
+                                </div>          
+                                <div class="vertical-timeline-content">
+                                    <h2><?php echo $mant->getServicioDto()->getDescripcion()?> - <?php echo $mant->getPersonaDto()->getNombreCompletoPrimeraMayuscula() ?></h2>
+                                    <span class="vertical-date">
+                                        <small style="color:#1d84c6; font-weight:100%; "><?php echo Util::formatDate($mant->getFecha(), EDateFormat::index(EDateFormat::DIA_MES_ANO_LETTER)->getId() );  ?></small>
+                                    </span>
+                                    <br>
+                                    <h3><?php echo lang('mantenimiento.descripcion') ?></h3>
+                                    <p style="text-align: justify;">
+                                    	<?php echo $mant->getDescripcion(); ?>
+                                    </p>
+                                    
+                                    <h3><?php echo lang('mantenimiento.pendientes')?></h3>
+                                    <p style="text-align: justify;">
+                                    	<?php echo $mant->getPendientes(); ?>
+                                    </p>
+                                    
+<!--                                     <a href="#" class="btn btn-sm btn-primary">More info</a>                             -->
+                                </div>
+                            </div>                                                                                                            
+                        </div>
+                    <?php } ?>                    
+                </div> 
+			</div>
+		</div>                               
+	</div>    
 </div>
 <?php echo Form::close(); ?>
 <script type="text/javascript">

@@ -6,7 +6,7 @@ span.message-success { width: 100%; }
 #page-wrapper .page-heading { padding: 0 10px 15px 10px; }
 .page-heading h2 { margin-top: 7px; margin-bottom: 5px; }
 #small-chat, .small-chat-box { bottom: 40px; }
-.ui-dialog { z-index: 9999 !important; }
+.ui-dialog { z-index: 9999 !important; } div.scroller {overflow-y: auto; min-height: 60vh; max-height: 60vh;}
 /*
 	 .ui-menu .ui-menu-item-wrapper { position: relative; padding: 5px 1em 5px .4em; }
 	 .ui-menu .ui-menu-item-wrapper .fa-2x { font-size: 1.7em; margin-top: 30px; }

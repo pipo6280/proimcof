@@ -155,6 +155,8 @@ class MantenimientoController extends Controller
         foreach ($lisEquipos as $equipo) {
             $this->object->setEquipoDto($equipo);
         }
+        
+        $this->object->setList_mantenimientos($this->model->getListMantenimientos($this->object->getId_equipo()));
 
     }
     
