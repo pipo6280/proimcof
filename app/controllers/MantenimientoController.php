@@ -164,6 +164,26 @@ class MantenimientoController extends Controller
      *
      * @tutorial Method Description:
      * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
+     * @since {25/05/2020}
+     */
+    public function historial()
+    {
+        $this->view = 'historial';
+        $this->object->setList_servicios_enum($this->servicioModel->getListServiciosEnum(null));
+        $lisEquipos = $this->model->getEquipos(null, null, $this->object->getId_equipo());
+        
+        foreach ($lisEquipos as $equipo) {
+            $this->object->setEquipoDto($equipo);
+        }
+        
+        $this->object->setList_mantenimientos($this->model->getListMantenimientos($this->object->getId_equipo()));
+        
+    }
+    
+    /**
+     *
+     * @tutorial Method Description:
+     * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
      * @since {14/02/2017}
      */
     public function save() {

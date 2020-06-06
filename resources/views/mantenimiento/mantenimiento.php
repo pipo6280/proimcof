@@ -104,7 +104,7 @@ $object = $object instanceof MantenimientoDto ? $object : new MantenimientoDto()
                                    </a>
                                 </td>  
                                 <td class="text-center" >
-                                   <a href="#" class="historyMantenimiento <?php echo $object->getPermisoDto()->getIconEdit(); ?>" data-id_equipo="<?php echo $lis->getId_equipo(); ?>" data-nombre="<?php echo $lis->getNombreEquipo(); ?>" data-toggle="tooltip" title="<?php echo lang('general.title_history', [$lis->getNombreEquipo()]); ?>">
+                                   <a href="#" class="historyMantenimiento <?php echo $object->getPermisoDto()->getIconEdit(); ?>" data-id_equipo="<?php echo $lis->getId_equipo(); ?>" data-id_cliente="<?php echo $object->getId_cliente(); ?>" data-nombre="<?php echo $lis->getNombreEquipo(); ?>" data-search_equipo="<?php echo $object->getSearch_equipo()?>" data-toggle="tooltip" title="<?php echo lang('general.title_edit', [$lis->getNombreEquipo()]);  ?>">
                                         <i class="fas fa-history fa-2x"></i>
                                    </a>
                                 </td>                               
@@ -125,6 +125,20 @@ $object = $object instanceof MantenimientoDto ? $object : new MantenimientoDto()
     	    //l.start();
     		Framework.setLoadData({
     			pagina: '<?php echo site_url('mantenimiento/edit'); ?>',
+    			data: { 
+    				txtSearch_equipo: options.search_equipo,
+    	    		txtId_equipo : options.id_equipo,
+    	    		txtId_cliente : options.id_cliente 
+    	        },    			
+    		});
+    	});
+
+    	$('a.historyMantenimiento').click(function () {
+    		var options = jQuery.extend({ id_equipo : null, id_cliente : null, search_equipo : null}, $(this).data());
+    		//var l = Ladda.create(this);
+    	    //l.start();
+    		Framework.setLoadData({
+    			pagina: '<?php echo site_url('mantenimiento/historial'); ?>',
     			data: { 
     				txtSearch_equipo: options.search_equipo,
     	    		txtId_equipo : options.id_equipo,
