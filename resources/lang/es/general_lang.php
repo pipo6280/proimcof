@@ -125,6 +125,7 @@ return [
     'estado_equipo_alquiler' => 'Alquiler',
     'estado_equipo_reparacion' => 'Reparación',
     'estado_equipo_inactivo' => 'Fuera de servicio',
+    'estado_equipo_cliente_general' => 'Cliente General',
     
     /*
      * |---------------------------------

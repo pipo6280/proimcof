@@ -20,6 +20,8 @@ class EEstadoEquipo extends AEnum
 
     const INACTIVO = 'N_4';
     
+    const CLIENTE_GENERAL = 'N_5';
+    
 
     /**
      * 
@@ -33,6 +35,7 @@ class EEstadoEquipo extends AEnum
         static::$array[static::ALQUILER] = new EEstadoEquipo(2, lang('general.estado_equipo_alquiler'));
         static::$array[static::REPARACION] = new EEstadoEquipo(3, lang('general.estado_equipo_reparacion'));
         static::$array[static::INACTIVO] = new EEstadoEquipo(4, lang('general.estado_equipo_inactivo'));
+        static::$array[static::CLIENTE_GENERAL] = new EEstadoEquipo(5, lang('general.estado_equipo_cliente_general'));
     }
 
     /**
