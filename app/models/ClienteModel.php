@@ -536,8 +536,8 @@ class ClienteModel
             }
             
             if (! Util::isVacio($activoC)) {
-                $sql .= " AND eqp.estado = :estadoC ";
-                $arrayParams[':estadoC'] = $activoC;
+                $sql .= " AND eqp.estado IN ( ".$activoC." )";
+                //$arrayParams[':estadoC'] = $activoC;
             }
             
             $sql .= " ORDER BY mrc.id_marca, mdl.modelo, eqp.id_equipo ";

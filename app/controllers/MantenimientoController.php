@@ -114,9 +114,7 @@ class MantenimientoController extends Controller
     public function index()
     {
         //$this->view ="servicio";
-        $sessionDto = Util::userSessionDto();
-        $oMenu = new \app\models\MenuModel();
-        $this->_array['menu'] = $oMenu->getMenuHorizontal($sessionDto->getIdUsuario(), 59);
+                
     }
     
     /**
@@ -126,7 +124,11 @@ class MantenimientoController extends Controller
      * @since {14/02/2017}
      */
     public function inicio(){
+        $sessionDto = Util::userSessionDto();
+        $oMenu = new \app\models\MenuModel();
+        
         $this->view ="mantenimiento";
+        $this->_array['menu'] = $oMenu->getMenuHorizontal($sessionDto->getIdUsuario(), 63);
         $this->object->setList_clientes_enum($this->model->getListClientesEnum());
     }
     

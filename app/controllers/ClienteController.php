@@ -431,7 +431,7 @@ class ClienteController extends \system\Core\Controller
             $dto = ! Util::isVacio($dto) ? Arr::current($dto) : new ClienteSedeDto();
             
             if (Arr::isEmptyArray($dto->getList_equipos()) || $add) {
-                $estado = EEstadoEquipo::index(EEstadoEquipo::SIN_ASIGNAR)->getId();
+                $estado = EEstadoEquipo::index(EEstadoEquipo::SIN_ASIGNAR)->getId().",".EEstadoEquipo::index(EEstadoEquipo::CLIENTE_GENERAL)->getId();
                 $equipo = new ClienteSedeEquipoDto();
                 $equipo->setList_equipos_enum($this->model->getEquiposEnum(null, null, $estado));
                 $equipos = $dto->getList_equipos();
