@@ -353,15 +353,15 @@ $(function() {
 				});				
 			},
 			rules: {
-				'txtDto-txtPersonaDto-txtPrimer_nombre': { required: true, minlength: 5 },
-				'txtDto-txtPersonaDto-txtPrimer_apellido': { required: true, minlength: 5 },
+				'txtDto-txtPersonaDto-txtPrimer_nombre': { required: true, minlength: 2 },
+				'txtDto-txtPersonaDto-txtPrimer_apellido': { required: true, minlength: 2 },
 				'txtDto-txtPersonaDto-txtTipo_identificacion': { required: true},
-				'txtDto-txtPersonaDto-txtNumero_identificacion': { required: true, minlength: 5 },
+				'txtDto-txtPersonaDto-txtNumero_identificacion': { required: true, minlength: 2 },
 				'txtDto-txtPersonaDto-txtFecha_nacimiento': { required: true },
 				'txtDto-txtPersonaDto-txtGenero': { required: true },
 				'txtDto-txtPersonaDto-txtEstado_civil': { required: true },
 				'txtDto-txtPersonaDto-txtMovil': { required: true, digits: true, minlength: 10 },
-				'txtDto-txtPersonaDto-txtTelefono': { digits: true, minlength: 5 },
+				'txtDto-txtPersonaDto-txtTelefono': { digits: true, minlength: 3 },
 				'txtDto-txtPersonaDto-txtEmail': { required: true, email: true },
 				'txtDto-txtListCargos[]': "required"						
 			},
