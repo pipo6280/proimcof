@@ -18,6 +18,11 @@ return [
     'estado' => 'Estado',
     'pendientes' => 'Pendientes',
     
+    'contador_negro' => 'Contador Negro',
+    'contador_cyan' => 'Contador Cyan',
+    'contador_magenta' => 'Contador Magenta',
+    'contador_amarillo' => 'Contador Amarillo',
+    
     'gasto_guardado_ok' => 'El Servicio Técnico <b>{0}</b> fue guardado con exíto',
     'no_delete' => 'No es posible eliminar el Servicio Técnico'
 ];

@@ -8,14 +8,14 @@ use system\Support\Arr;
  * @author pipo
  *
  */
-class MantenimientoDto extends ADto
+class RecargasDto extends ADto
 {
 
     /**
      * 
      * @var integer
      */
-    private $id_mantenimiento;    
+    private $id_recarga;    
     /**
      *
      * @var integer
@@ -28,20 +28,54 @@ class MantenimientoDto extends ADto
     private $id_equipo;
     /**
      *
+     * @var string
+     */
+    private $descripcion;    
+    /**
+     *
+     * @var string
+     */
+    private $pendientes;    
+    /**
+     *
      * @var integer
      */
-    private $id_servicio;
+    private $contador_negro;   
     /**
      *
-     * @var string
+     * @var boolean
      */
-    private $descripcion;
-    
+    private $yn_contador_negro;   
     /**
      *
-     * @var string
+     * @var integer
      */
-    private $pendientes;
+    private $contador_cyan;
+    /**
+     * 
+     * @var boolean
+     */
+    private $yn_contador_cyan;
+    /**
+     *
+     * @var integer
+     */
+    private $contador_magenta;
+    /**
+     * 
+     * @var boolean
+     */
+    private $yn_contador_magenta;
+    /**
+     *
+     * @var integer
+     */
+    private $contador_amarillo;
+    /**
+     * 
+     * @var boolean
+     */
+    private $yn_contador_amarillo;
     /**
      *
      * @var \DateTime
@@ -81,12 +115,7 @@ class MantenimientoDto extends ADto
      * @var EquipoDto
      */
     private $equipoDto;
-    /**
-     * 
-     * @var ServicioDto
-     */    
-    private $servicioDto;
-    
+
     /********************************************************************/
    
     /**
@@ -94,34 +123,7 @@ class MantenimientoDto extends ADto
      * @var integer
      */
     private $id_cliente;
-    /**
-     *  @var string
-     */
-    private $search_equipo;
-    
-    /**
-     * 
-     * @var array
-     */
-    private $list_clientes_enum;
-        
-    /**
-     *
-     * @var array
-     */
-    private $list_servicios_enum;
-        
-    /**
-     * 
-     * @var array
-     */
-    private $list_mantenimientos;
-    
-    /**
-     *
-     * @var array
-     */
-    private $list_recargas;
+
     
     /**
      * 
@@ -132,20 +134,25 @@ class MantenimientoDto extends ADto
         
         $this->equipoDto = new EquipoDto();
         $this->rhRepresentanteDto = new RhRepresentanteDto();
-        $this->servicioDto = new ServicioDto();
         $this->personaDto = new PersonaDto();
-        
-        $this->list_clientes_enum = new Arr();
-        $this->list_servicios_enum = new Arr();
-        $this->list_mantenimientos = new Arr();
-        $this->list_recargas = new Arr();
+
     }
+    
+
     /**
-     * @return the $id_mantenimiento
+     * @return the $id_recarga
      */
-    public function getId_mantenimiento()
+    public function getId_recarga()
     {
-        return $this->id_mantenimiento;
+        return $this->id_recarga;
+    }
+
+    /**
+     * @param number $id_recarga
+     */
+    public function setId_recarga($id_recarga)
+    {
+        $this->id_recarga = $id_recarga;
     }
 
     /**
@@ -165,14 +172,6 @@ class MantenimientoDto extends ADto
     }
 
     /**
-     * @return the $id_servicio
-     */
-    public function getId_servicio()
-    {
-        return $this->id_servicio;
-    }
-
-    /**
      * @return the $descripcion
      */
     public function getDescripcion()
@@ -186,6 +185,38 @@ class MantenimientoDto extends ADto
     public function getPendientes()
     {
         return $this->pendientes;
+    }
+
+    /**
+     * @return the $contador_negro
+     */
+    public function getContador_negro()
+    {
+        return $this->contador_negro;
+    }
+
+    /**
+     * @return the $contador_cyan
+     */
+    public function getContador_cyan()
+    {
+        return $this->contador_cyan;
+    }
+
+    /**
+     * @return the $contador_magenta
+     */
+    public function getContador_magenta()
+    {
+        return $this->contador_magenta;
+    }
+
+    /**
+     * @return the $contador_amarillo
+     */
+    public function getContador_amarillo()
+    {
+        return $this->contador_amarillo;
     }
 
     /**
@@ -237,19 +268,19 @@ class MantenimientoDto extends ADto
     }
 
     /**
+     * @return the $personaDto
+     */
+    public function getPersonaDto()
+    {
+        return $this->personaDto;
+    }
+
+    /**
      * @return the $equipoDto
      */
     public function getEquipoDto()
     {
         return $this->equipoDto;
-    }
-
-    /**
-     * @return the $servicioDto
-     */
-    public function getServicioDto()
-    {
-        return $this->servicioDto;
     }
 
     /**
@@ -277,20 +308,13 @@ class MantenimientoDto extends ADto
     }
 
     /**
-     * @return the $list_servicios_enum
+     * @return the $list_mantenimientos
      */
-    public function getList_servicios_enum()
+    public function getList_mantenimientos()
     {
-        return $this->list_servicios_enum;
+        return $this->list_mantenimientos;
     }
 
-    /**
-     * @param number $id_mantenimiento
-     */
-    public function setId_mantenimiento($id_mantenimiento)
-    {
-        $this->id_mantenimiento = $id_mantenimiento;
-    }
 
     /**
      * @param number $id_representante
@@ -309,14 +333,6 @@ class MantenimientoDto extends ADto
     }
 
     /**
-     * @param number $id_servicio
-     */
-    public function setId_servicio($id_servicio)
-    {
-        $this->id_servicio = $id_servicio;
-    }
-
-    /**
      * @param string $descripcion
      */
     public function setDescripcion($descripcion)
@@ -330,6 +346,38 @@ class MantenimientoDto extends ADto
     public function setPendientes($pendientes)
     {
         $this->pendientes = $pendientes;
+    }
+
+    /**
+     * @param number $contador_negro
+     */
+    public function setContador_negro($contador_negro)
+    {
+        $this->contador_negro = $contador_negro;
+    }
+
+    /**
+     * @param number $contador_cyan
+     */
+    public function setContador_cyan($contador_cyan)
+    {
+        $this->contador_cyan = $contador_cyan;
+    }
+
+    /**
+     * @param number $contador_magenta
+     */
+    public function setContador_magenta($contador_magenta)
+    {
+        $this->contador_magenta = $contador_magenta;
+    }
+
+    /**
+     * @param number $contador_amarillo
+     */
+    public function setContador_amarillo($contador_amarillo)
+    {
+        $this->contador_amarillo = $contador_amarillo;
     }
 
     /**
@@ -381,19 +429,19 @@ class MantenimientoDto extends ADto
     }
 
     /**
+     * @param \app\dtos\PersonaDto $personaDto
+     */
+    public function setPersonaDto($personaDto)
+    {
+        $this->personaDto = $personaDto;
+    }
+
+    /**
      * @param \app\dtos\EquipoDto $equipoDto
      */
     public function setEquipoDto($equipoDto)
     {
         $this->equipoDto = $equipoDto;
-    }
-
-    /**
-     * @param \app\dtos\ServicioDto $servicioDto
-     */
-    public function setServicioDto($servicioDto)
-    {
-        $this->servicioDto = $servicioDto;
     }
 
     /**
@@ -411,66 +459,80 @@ class MantenimientoDto extends ADto
     {
         $this->search_equipo = $search_equipo;
     }
-
     /**
-     * @param array $list_clientes_enum
+     * @return the $yn_contador_negro
      */
-    public function setList_clientes_enum($list_clientes_enum)
+    public function getYn_contador_negro()
     {
-        $this->list_clientes_enum = $list_clientes_enum;
+        if($this->contador_negro >0 ) {
+            return true;
+        }
+        return $this->yn_contador_negro;
     }
 
     /**
-     * @param array $list_servicios_enum
+     * @return the $yn_contador_cyan
      */
-    public function setList_servicios_enum($list_servicios_enum)
+    public function getYn_contador_cyan()
     {
-        $this->list_servicios_enum = $list_servicios_enum;
-    }
-    /**
-     * @return the $personaDto
-     */
-    public function getPersonaDto()
-    {
-        return $this->personaDto;
+        if($this->contador_cyan >0 ) {
+            return true;
+        }
+        return $this->yn_contador_cyan;
     }
 
     /**
-     * @param \app\dtos\PersonaDto $personaDto
+     * @return the $yn_contador_magenta
      */
-    public function setPersonaDto($personaDto)
+    public function getYn_contador_magenta()
     {
-        $this->personaDto = $personaDto;
-    }
-    /**
-     * @return the $list_mantenimientos
-     */
-    public function getList_mantenimientos()
-    {
-        return $this->list_mantenimientos;
+        if($this->contador_magenta > 0 ) {
+            return true;
+        }
+        return $this->yn_contador_magenta;
     }
 
     /**
-     * @param array $list_mantenimientos
+     * @return the $yn_contador_amarillo
      */
-    public function setList_mantenimientos($list_mantenimientos)
+    public function getYn_contador_amarillo()
     {
-        $this->list_mantenimientos = $list_mantenimientos;
-    }
-    /**
-     * @return the $list_recargas
-     */
-    public function getList_recargas()
-    {
-        return $this->list_recargas;
+        if($this->contador_amarillo > 0 ) {
+            return true;
+        }
+        return $this->yn_contador_amarillo;
     }
 
     /**
-     * @param array $list_recargas
+     * @param boolean $yn_contador_negro
      */
-    public function setList_recargas($list_recargas)
+    public function setYn_contador_negro($yn_contador_negro)
     {
-        $this->list_recargas = $list_recargas;
-    }     
-    
+        $this->yn_contador_negro = $yn_contador_negro;
+    }
+
+    /**
+     * @param boolean $yn_contador_cyan
+     */
+    public function setYn_contador_cyan($yn_contador_cyan)
+    {
+        $this->yn_contador_cyan = $yn_contador_cyan;
+    }
+
+    /**
+     * @param boolean $yn_contador_magenta
+     */
+    public function setYn_contador_magenta($yn_contador_magenta)
+    {
+        $this->yn_contador_magenta = $yn_contador_magenta;
+    }
+
+    /**
+     * @param boolean $yn_contador_amarillo
+     */
+    public function setYn_contador_amarillo($yn_contador_amarillo)
+    {
+        $this->yn_contador_amarillo = $yn_contador_amarillo;
+    }
+
 }

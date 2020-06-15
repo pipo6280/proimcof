@@ -10,6 +10,7 @@ use app\dtos\EquipoDto;
 use app\dtos\ClienteSedeDto;
 use app\dtos\MantenimientoDto;
 use app\dtos\RhRepresentanteDto;
+use app\dtos\RecargasDto;
 /**
  * 
  * @tutorial Working Class
@@ -179,6 +180,55 @@ class MantenimientoModel
     }
     
     /**
+     * 
+     * @param unknown $idEquipo
+     * @throws Exception
+     * @return \app\dtos\RecargasDto[]
+     */
+    public function getListRecargas($idEquipo = null) {
+        
+        try {
+            $result = array();
+            $arrayParams = array();
+            $sql = 'SELECT
+                        rcg.*,
+                        prs.id_persona,
+                        prs.primer_nombre,
+                        prs.segundo_nombre,
+                        prs.primer_apellido,
+                        prs.segundo_apellido
+                    FROM recarga rcg
+                    INNER JOIN rh_representante rpt ON rcg.id_representante = rpt.id_representante
+                    INNER JOIN persona prs ON rpt.id_persona = prs.id_persona
+                WHERE 1 ';
+            
+            if (! Util::isVacio($idEquipo)) {
+                $sql .= " AND rcg.id_equipo = :idEquipo ";
+                $arrayParams[':idEquipo'] = $idEquipo;
+            }
+            
+            $sql .= " ORDER BY rcg.fecha DESC";
+            
+            $statement = Doctrine::prepare($sql);
+            $statement->execute($arrayParams);
+            $list = $statement->fetchAll();
+            
+            foreach ($list as $row) {
+                $object = new RecargasDto();
+                Util::setObjectRow($object, $row);
+                Util::setObjectRow($object->getPersonaDto(), $row);               
+                
+                $result[] = $object;
+            }
+            
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return $result;
+        
+    }
+    
+    /**
      *
      * @tutorial Method Description:
      * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
@@ -265,7 +315,7 @@ class MantenimientoModel
      * @throws Exception
      * @return boolean|number
      */
-    public function save(MantenimientoDto $object)
+    public function save(RecargasDto $object)
     {
         try {
             $result = false;
@@ -273,19 +323,22 @@ class MantenimientoModel
             $data['descripcion'] = $object->getDescripcion();
             $data['pendientes'] = $object->getPendientes();
             $data['fecha'] = Util::fecha($object->getFecha());
-            $data['id_equipo'] = $object->getId_equipo();
-            $data['id_servicio'] = $object->getId_servicio();
+            $data['id_equipo'] = $object->getId_equipo();           
             $data['id_representante'] = $representante->getId_representante();
+            $data['contador_negro'] = $object->getContador_negro();
+            $data['contador_cyan'] = $object->getContador_cyan();
+            $data['contador_magenta'] = $object->getContador_magenta();
+            $data['contador_amarillo'] = $object->getContador_amarillo();
             
-            if (Util::isVacio($object->getId_mantenimiento())) {
+            if (Util::isVacio($object->getId_recarga())) {
                 $data['id_usuario_registra'] = Util::userSessionDto()->getIdUsuario();
                 $data['fecha_registro'] = Util::fechaActual(true);
-                $result = Doctrine::insert('mantenimiento', $data);
+                $result = Doctrine::insert('recarga', $data);
             } else {
                 $data['id_usuario_modifica'] = Util::userSessionDto()->getIdUsuario();
                 $data['fecha_modifica'] = Util::fechaActual(true);
-                $result = Doctrine::update('mantenimiento', $data, [
-                    'id_mantenimiento' => $object->getId_mantenimiento()
+                $result = Doctrine::update('recarga', $data, [
+                    'id_recarga' => $object->getId_recarga()
                 ]);
             }
         } catch (\Exception $e) {

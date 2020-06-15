@@ -15,6 +15,7 @@ use app\dtos\MantenimientoDto;
 use app\models\MantenimientoModel;
 use app\models\ServicioModel;
 use app\models\EquipoModel;
+use app\dtos\RecargasDto;
 
 /**
  *
@@ -132,15 +133,32 @@ class MantenimientoController extends Controller
         $this->object->setList_clientes_enum($this->model->getListClientesEnum());
     }
     
+    
+    /**
+     *
+     * @tutorial Method Description:
+     * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
+     * @since {14/02/2017}
+     */
+    public function recargas(){
+        $sessionDto = Util::userSessionDto();
+        $oMenu = new \app\models\MenuModel();
+        
+        $this->view ="recargas";
+        $this->_array['menu'] = $oMenu->getMenuHorizontal($sessionDto->getIdUsuario(), 61);
+        $this->object->setList_clientes_enum($this->model->getListClientesEnum());
+    }
+    
     /**
      * @tutorial Method Description:
      * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
      * @since {23/05/2020}
      */
     public function buscar_equipos() {
-        $this->inicio();
+        $this->recargas();
         $this->object->setList($this->model->getEquipos($this->object->getSearch_equipo(), $this->object->getId_cliente()));
     }
+    
     
     /**
      *
@@ -159,7 +177,26 @@ class MantenimientoController extends Controller
         }
         
         $this->object->setList_mantenimientos($this->model->getListMantenimientos($this->object->getId_equipo()));
-
+    }
+    
+    /*
+    *  @tutorial Method Description:
+    * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
+    * @since {25/05/2020}
+    * 
+    */
+    public function editRecarga()
+    {
+        $this->view = 'registro_recarga';
+        $this->object->setDto(new RecargasDto());
+        //$this->object->setList_servicios_enum($this->servicioModel->getListServiciosEnum(null));
+        $lisEquipos = $this->model->getEquipos(null, null, $this->object->getId_equipo());
+        
+        foreach ($lisEquipos as $equipo) {
+            $this->object->setEquipoDto($equipo);
+        }
+        
+        $this->object->setList_recargas($this->model->getListRecargas($this->object->getId_equipo()));
     }
     
     /**
@@ -188,11 +225,14 @@ class MantenimientoController extends Controller
      * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
      * @since {14/02/2017}
      */
-    public function save() {
+    public function save_recarga() {
         $this->_array['contenido'] = false;
-
-        if (! Util::isVacio($this->object->getDescripcion()) && ! Util::isVacio($this->object->getId_servicio()) ) {
-            $this->_array['contenido'] = $this->model->save($this->object);
+        
+        $this->object->setDto(new RecargasDto());
+        Persistir::postADto($this->object);
+        $this->object->getDto()->setId_equipo($this->object->getId_equipo());
+        if ($this->object->getDto()->getContador_negro() > 0 ) {
+            $this->_array['contenido'] = $this->model->save($this->object->getDto());
         }
     }
     

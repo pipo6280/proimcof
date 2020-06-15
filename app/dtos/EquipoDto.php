@@ -3,6 +3,7 @@ namespace app\dtos;
 
 use app\enums\EEstadoEquipo;
 use system\Support\Util;
+use app\enums\EEstilo;
 
 /**
  *
@@ -118,6 +119,13 @@ class EquipoDto extends ADto
         parent::__construct();
     }    
     
+    
+    public function getEquipoColor() {
+        if($this->modeloDto->getEstilo() == EEstilo::index(EEstilo::COLOR)->getId()) {
+            return true;
+        }
+        return false;
+    }
     /**
      * 
      */
