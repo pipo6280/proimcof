@@ -175,6 +175,16 @@ return [
     'estado_modificado' => 'Modificada',
     
     /*
+     * |---------------------------------
+     * | EestadoListaChequeo
+     * |---------------------------------
+     */
+    'estado_inspeccionar' => 'Inspeccionar',
+    'estado_limpiar' => 'Limpiar',
+    'estado_cambiar' => 'Cambiar',
+    /*
+    
+    /*
      * |---------------------------
      * | duracion paquete language lines
      * |---------------------------

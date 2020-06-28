@@ -2,6 +2,7 @@
 namespace app\dtos;
 
 use system\Support\Arr;
+use Doctrine\DBAL\Types\SmallIntType;
 
 /**
  * 
@@ -31,6 +32,21 @@ class MantenimientoDto extends ADto
      * @var integer
      */
     private $id_servicio;
+    /**
+     *
+     * @var integer
+     */    
+    private $estado;
+    /**
+     *
+     * @var string
+     */
+    private $antecedente;
+    /**
+     *
+     * @var SmallIntType
+     */  
+    private $yn_equipo_funcionando;
     /**
      *
      * @var string
@@ -471,6 +487,56 @@ class MantenimientoDto extends ADto
     public function setList_recargas($list_recargas)
     {
         $this->list_recargas = $list_recargas;
-    }     
+    }
+    /**
+     * @return the $estado
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * @return the $antecedente
+     */
+    public function getAntecedente()
+    {
+        return $this->antecedente;
+    }
+
+    /**
+     * @return the $yn_equipo_funcionando
+     */
+    public function getYn_equipo_funcionando()
+    {
+        return $this->yn_equipo_funcionando;
+    }
+
+    /**
+     * @param number $estado
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+    }
+
+    /**
+     * @param string $antecedente
+     */
+    public function setAntecedente($antecedente)
+    {
+        $this->antecedente = $antecedente;
+    }
+
+    /**
+     * @param \Doctrine\DBAL\Types\SmallIntType $yn_equipo_funcionando
+     */
+    public function setYn_equipo_funcionando($yn_equipo_funcionando)
+    {
+        $this->yn_equipo_funcionando = $yn_equipo_funcionando;
+    }
+     
+    
+    
     
 }

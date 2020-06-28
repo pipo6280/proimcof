@@ -3,38 +3,43 @@ namespace app\enums;
 
 /**
  *
- * @tutorial Class Work:
+ * @class app\enums\EGenero
+ *
+ * @tutorial
+ *
  * @author Rodolfo Perez ~ pipo6280@gmail.com
- * @since oct 18, 2016
+ * @since 20/09/2015
  */
-class ETipoPublicacion extends AEnum
+class EestadoListaChequeo extends AEnum
 {
 
     protected static $array = array();
 
-    const TEXTO = 'N_1';
+    const INSPECCIONAR = 'N_1';
 
-    const TEXTO_IMAGEN = 'N_2';
+    const LIMPIAR = 'N_2';
 
-    const TEXTO_VIDEO = 'N_3';
+    const CAMBIAR = 'N_3';
 
     /**
      *
      * @tutorial initializes the values ​​listed
      * @author Rodolfo Perez ~ pipo6280@gmail.com
      * @since {20/09/2015}
+     * @param string $show            
      * @return void
      */
-    public static function values()
+    public static function values($show = FALSE)
     {
-        self::$array[self::TEXTO] = new ETipoPublicacion(1, lang('general.publicacion_texto'));
-        self::$array[self::TEXTO_IMAGEN] = new ETipoPublicacion(2, lang('general.publicacion_texto_imagen'));
-        self::$array[self::TEXTO_VIDEO] = new ETipoPublicacion(3, lang('general.publicacion_texto_video'));
+        self::$array[self::INSPECCIONAR] = new EestadoListaChequeo(1, lang('general.estado_inspeccionar'));
+        self::$array[self::LIMPIAR] = new EestadoListaChequeo(2, lang('general.estado_limpiar'));
+        self::$array[self::CAMBIAR] = new EestadoListaChequeo(3, lang('general.estado_cambiar'));
+        
     }
 
     /**
      *
-     * @tutorial search for ETipoPublicacion index
+     * @tutorial search for EGenero index
      * @author Rodolfo Perez ~ pipo6280@gmail.com
      * @since {20/09/2015}
      * @param string $search            
@@ -48,16 +53,16 @@ class ETipoPublicacion extends AEnum
 
     /**
      *
-     * @tutorial get result of the ETipoPublicacion values
+     * @tutorial get result of the EGenero values
      * @author Rodolfo Perez ~ pipo6280@gmail.com
      * @since {20/09/2015}
      * @param string $search            
-     * @return Ambigous <\app\enums\ETipoPublicacion, ETipoPublicacion>
+     * @return Ambigous <\app\enums\EestadoListaChequeo, EestadoListaChequeo>
      */
     public static function result($search)
     {
         self::values();
-        $result = new ETipoPublicacion(NULL, NULL);
+        $result = new EestadoListaChequeo(NULL, NULL);
         foreach (self::$array as $dato) {
             if ($dato->getId() == $search) {
                 $result = $dato;
@@ -69,7 +74,7 @@ class ETipoPublicacion extends AEnum
 
     /**
      *
-     * @tutorial get data values ETipoPublicacion listed
+     * @tutorial get data values EestadoListaChequeo listed
      * @author Rodolfo Perez ~ pipo6280@gmail.com
      * @since {20/09/2015}
      * @return array
