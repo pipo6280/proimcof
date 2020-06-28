@@ -8,7 +8,7 @@ use Doctrine\DBAL\Types\SmallIntType;
  * @author pipo
  *
  */
-class MantenimientoListaGrupoDto extends ADto
+class MantenimientoListaChequeoDto extends ADto
 {
     
     /**
@@ -26,7 +26,6 @@ class MantenimientoListaGrupoDto extends ADto
      * @var integer
      */
     private $id_mantenimiento;
-
     /**
      *
      * @var SmallIntType

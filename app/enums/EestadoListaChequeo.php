@@ -29,7 +29,7 @@ class EestadoListaChequeo extends AEnum
      * @param string $show            
      * @return void
      */
-    public static function values($show = FALSE)
+    public static function values()
     {
         self::$array[self::INSPECCIONAR] = new EestadoListaChequeo(1, lang('general.estado_inspeccionar'));
         self::$array[self::LIMPIAR] = new EestadoListaChequeo(2, lang('general.estado_limpiar'));
