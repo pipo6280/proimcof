@@ -17,6 +17,8 @@ return [
     'registrar' => 'Registrar',
     'estado' => 'Estado',
     'pendientes' => 'Pendientes',
+    'solicitud' => 'Solicitud',
+    'tecnico' => 'Técnico Asignado',
     
     'contador_negro' => 'Contador Negro',
     'contador_cyan' => 'Contador Cyan',

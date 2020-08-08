@@ -25,7 +25,7 @@ return [
      * | Admin layout language lines 
      * |---------------------------
      */
-    'birthday_customer_count' => '{0} cliente(s) están de cumpleaños',
+    'birthday_customer_count' => '{0} mantenimientos Programados',
     'photo_profile_avatar' => 'public/img/perfil/avatar.jpg',
     'photo_profile_logo' => 'public/img/login-logo.png',
     'photo_app_logo' => 'public/img/logo_app.png',
@@ -34,7 +34,7 @@ return [
     'birthday_customer_contact' => 'Contacto: {0}',
     'welcome_to_app' => 'Bienvenido a <b>{0}</b>',
     'photo_profile' => 'public/img/perfil/{0}',
-    'birthday_customer' => '{0} años',
+    'birthday_customer' => '{0}',
     'contacts' => 'Contactos',
     'mailbox' => 'Mailbox',
     'profile' => 'Perfil',
@@ -126,6 +126,17 @@ return [
     'estado_equipo_reparacion' => 'Reparación',
     'estado_equipo_inactivo' => 'Fuera de servicio',
     'estado_equipo_cliente_general' => 'Cliente General',
+    
+    /*
+     * |---------------------------------
+     * | EEstadoMantenimiento
+     * |---------------------------------
+     */
+    'estado_mantenimieno_solicitado' => 'Solicitado',
+    'estado_mantenimieno_revisado' => 'Revisado',
+    'estado_mantenimieno_pendiente' => 'Pendiente',
+    'estado_mantenimieno_solucionado' => 'Solucionado',
+    'estado_mantenimieno_cerrado' => 'Cerrado',
     
     /*
      * |---------------------------------

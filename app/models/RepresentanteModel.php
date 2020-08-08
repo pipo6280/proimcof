@@ -13,6 +13,7 @@ use system\Support\Util;
 use system\Support\Str;
 use system\Support\Arr;
 use app\enums\ESiNo;
+use app\enums\EnumGeneric;
 
 /**
  *
@@ -309,6 +310,51 @@ class RepresentanteModel
         }
         return $result;
     }
+    
+    /**
+     * 
+     */
+    public function getListRepresentantesEnum() {
+        $return = array();
+        $lista = $this->getListRepresentantesTecnico();
+        foreach ($lista as $l) {
+            $return[] = new EnumGeneric($l->getId_representante(), $l->getPersonaDto()->getNombreCompletoPrimeraMayuscula());
+        }
+        return $return;
+    }
+    
+    public function getListRepresentantesTecnico()
+    {
+        try {
+            $arrayLlaves = [];
+            $arrayParams = [];
+            $result = [];
+            $sql = 'SELECT DISTINCT
+                        rep.id_representante,
+                        per.*
+                    FROM rh_representante rep
+                        INNER JOIN persona per
+                            ON per.id_persona = rep.id_persona
+                        INNER JOIN rh_representante_cargo rrc 
+                            ON rrc.id_representante  = rep.id_representante
+                    WHERE rrc.id_cargo = 2 ';
+            
+            $statement = Doctrine::prepare($sql);
+            $statement->execute($arrayParams);
+            $list = $statement->fetchAll();
+            foreach ($list as $row) {
+                $object = new RhRepresentanteDto();
+                Util::setObjectRow($object, $row);
+                Util::setObjectRow($object->getPersonaDto(), $row);
+                $result[] = $object;
+            }
+            // $arrayServices = $this->getListRepresentanteServicios($arrayLlaves);
+
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return $result;
+    }
 
     /**
      *
@@ -535,42 +581,6 @@ class RepresentanteModel
             }
         }
         return $return;
-    }
-
-    /**
-     *
-     * @tutorial Method Description: consulta las citas del representante
-     * @author Rodolfo Perez ~~ pipo6280@gmail.com
-     * @since {13/01/2016}
-     * @param string $idRepresentanteC            
-     * @throws \Exception
-     * @return multitype:\app\dtos\ClienteCitaDto
-     */
-    public function getCitasRepresententantes($idRepresentanteC = NULL)
-    {
-        try {
-            $result = [];
-            $arrayParams = [];
-            $sql = 'SELECT
-                    cita.*
-                FROM cliente_cita cita
-                WHERE 1 ';
-            if (! Util::isVacio($idRepresentanteC)) {
-                $sql .= " AND cita.id_representante = :idRepresentanteC ";
-                $arrayParams[':idRepresentanteC'] = $idRepresentanteC;
-            }
-            $statement = Doctrine::prepare($sql);
-            $statement->execute($arrayParams);
-            $list = $statement->fetchAll();
-            foreach ($list as $row) {
-                $object = new ClienteCitaDto();
-                Util::setObjectRow($object, $row);
-                $result[] = $object;
-            }
-        } catch (\Exception $e) {
-            throw $e;
-        }
-        return $result;
     }
 
     /**

@@ -4,7 +4,6 @@ use system\Helpers\Form;
 use app\dtos\ServicioDto;
 use app\dtos\MantenimientoDto;
 use app\dtos\EquipoDto;
-use app\enums\EEstadoMantenimiento;
 
 $object = $object instanceof MantenimientoDto ? $object : new MantenimientoDto(); 
 ?>
@@ -15,15 +14,26 @@ $object = $object instanceof MantenimientoDto ? $object : new MantenimientoDto()
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-xs-12">
                     <div class="form-group">
-                        <?php echo Form::label(lang('mantenimiento.estado'), 'txtEstado'); ?>
+                        <?php echo Form::label(lang('mantenimiento.cliente'), 'txtId_cliente'); ?>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fas fa-hotel"></i></span>
-                            <?php echo Form::selectEnum('txtEstado', $object->getEstado(), EEstadoMantenimiento::data(),[
+                            <?php echo Form::selectEnum('txtId_cliente', $object->getId_cliente(), $object->getList_clientes_enum(),[
                                 'class' => 'form-control chosen-select ch'
                             ]);?>
                         </div>
                     </div>
-                </div>      
+                </div>
+                <div class="col-lg-3 col-md-3 col-xs-12">
+                    <div class="form-group">
+                        <?php echo Form::label(lang('mantenimiento.serial_equipo'), 'txtSearch_equipo'); ?>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fas fa-search"></i></span>
+                            <?php echo Form::text('txtSearch_equipo', $object->getSearch_equipo(), [
+                                'class' => 'form-control ch']
+                            );?>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-3 col-md-3 col-xs-12">
                     <div class="form-group">
                         <?php 
@@ -59,9 +69,6 @@ $object = $object instanceof MantenimientoDto ? $object : new MantenimientoDto()
                         <th class="text-center " >        
                             <?php echo lang('mantenimiento.ubicacion'); ?>
                         </th>
-                        <th class="text-center " >        
-                            <?php echo lang('mantenimiento.solicitud'); ?>
-                        </th>
                         <th class="text-center ">
                             <?php echo lang('mantenimiento.estado'); ?>
                         </th>
@@ -73,26 +80,23 @@ $object = $object instanceof MantenimientoDto ? $object : new MantenimientoDto()
                 <tbody>
                     <?php
                     $count = 1;
-                    foreach ($object->getList_mantenimientos() as $key => $lis) {
-                        if ($lis instanceof MantenimientoDto) { ?>
+                    foreach ($object->getList() as $key => $lis) {
+                        if ($lis instanceof EquipoDto) { ?>
                             <tr class="gradeX">
                                 <td class="text-center ">
                                     <?php echo $count; ?>
                                 </td>
                                 <td class="text-center ">
-                                    <?php echo $lis->getEquipoDto()->getNombreEquipo(); ?>
+                                    <?php echo $lis->getNombreEquipo(); ?>
                                 </td>
                                 <td class="text-center ">                                 
-                                    <?php echo $lis->getEquipoDto()->getClienteSedeDto()->getClienteDto()->getNombre_empresa(); ?>
-                                </td>
-                                <td class="text-justify ">
-                                    <?php echo $lis->getAntecedente(); ?>
+                                    <?php echo $lis->getUbicacionEquipo(); ?>
                                 </td>
                                 <td class="text-center ">
                                     <?php echo $lis->getTitleEstado(); ?>
                                 </td>
                                 <td class="text-center" >
-									<a href="#" class="editMantenimiento <?php echo $object->getPermisoDto()->getIconEdit(); ?>" data-id_mantenimiento="<?php echo $lis->getId_mantenimiento(); ?>"  data-nombre="<?php echo $lis->getEquipoDto()->getNombreEquipo(); ?>" data-toggle="tooltip" title="<?php echo lang('general.title_edit', [$lis->getEquipoDto()->getNombreEquipo()]); ?>">
+                                   <a href="#" class="editMantenimiento <?php echo $object->getPermisoDto()->getIconEdit(); ?>" data-id_equipo="<?php echo $lis->getId_equipo(); ?>" data-id_cliente="<?php echo $object->getId_cliente(); ?>" data-nombre="<?php echo $lis->getNombreEquipo(); ?>" data-search_equipo="<?php echo $object->getSearch_equipo()?>" data-toggle="tooltip" title="<?php echo lang('general.title_edit', [$lis->getNombreEquipo()]); ?>">
                                         <i class=" <?php echo $object->getPermisoDto()->getClassEdit(); ?> fa-2x"></i>
                                    </a>
                                 </td>  
@@ -150,7 +154,7 @@ $object = $object instanceof MantenimientoDto ? $object : new MantenimientoDto()
     	            } else {
     	            	l.start();
     	            	Framework.setLoadData({                                                        
-                            pagina : '<?php echo site_url('mantenimiento/inicio'); ?>',
+                            pagina : '<?php echo site_url('mantenimiento/buscar_equipos_mantenimiento'); ?>',
                             data: $(form).serialize(),
                             success: function(data) {
                     		    l.stop();

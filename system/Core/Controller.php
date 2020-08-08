@@ -5,10 +5,10 @@ use system\Session\Session;
 use system\Routing\Router;
 use system\Support\Util;
 use system\Support\Arr;
-use app\models\UsuarioModel;
 use app\dtos\UsuarioMenuDto;
-use app\models\RegistroModel;
 use app\enums\EEstadoCuenta;
+use app\models\MantenimientoModel;
+use app\enums\EEstadoMantenimiento;
 
 /**
  *
@@ -123,11 +123,11 @@ class Controller
                 $userMenu = $oMenu->getDrawMenuPrincipal($object, 0, $this->sessions->getIdUsuario(), \app\enums\EUbicacion::index(\app\enums\EUbicacion::VERTICAL)->getId(), TRUE);
                 $this->sessions->setUserMenu($userMenu);
                 if (! $this->sessions->getConsultaOK()) {
-                    $model = new UsuarioModel();
-                    $listBirthDays = $model->getClientesCumpleaños(Util::fechaActual());
+                    $model = new MantenimientoModel();
+                    $listBirthDays = $model->getListMantenimientosPorRepresentante($this->sessions->getPersonaDto()->getId_persona(), EEstadoMantenimiento::index(EEstadoMantenimiento::SOLICITADO)->getId());
                     $this->sessions->setListBirthDays($listBirthDays);
-                    $this->sessions->setConsultaOK($model->setCambiarEstadoSesionIndex(EEstadoCuenta::index(EEstadoCuenta::ACTIVA)->getId()));
-                    Doctrine::commit();
+                    $this->sessions->setConsultaOK(true);
+                    //Doctrine::commit();
                 }
                 Session::setData('sessionDto', Util::serialize($this->sessions));
                 Doctrine::close();

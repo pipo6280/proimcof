@@ -3,6 +3,7 @@ namespace app\dtos;
 
 use system\Support\Arr;
 use Doctrine\DBAL\Types\SmallIntType;
+use app\enums\EEstadoMantenimiento;
 
 /**
  * 
@@ -113,26 +114,27 @@ class MantenimientoDto extends ADto
     /**
      *  @var string
      */
-    private $search_equipo;
-    
+    private $search_equipo;    
     /**
      * 
      * @var array
      */
-    private $list_clientes_enum;
-        
+    private $list_clientes_enum;        
     /**
      *
      * @var array
      */
     private $list_servicios_enum;
-        
+    /**
+     *
+     * @var array
+     */
+    private $list_tecnicos_enum;        
     /**
      * 
      * @var array
      */
-    private $list_mantenimientos;
-    
+    private $list_mantenimientos;    
     /**
      *
      * @var array
@@ -151,11 +153,24 @@ class MantenimientoDto extends ADto
         $this->servicioDto = new ServicioDto();
         $this->personaDto = new PersonaDto();
         
+        $this->list_tecnicos_enum = new Arr();
         $this->list_clientes_enum = new Arr();
         $this->list_servicios_enum = new Arr();
         $this->list_mantenimientos = new Arr();
         $this->list_recargas = new Arr();
     }
+    
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \app\dtos\ADto::getTitleEstado()
+     */
+    public function getTitleEstado()
+    {
+        //$this->titleEstado = ($this->estado == ESiNo::index()->getId()) ? 'Activo' : 'Inactivo';
+        return EEstadoMantenimiento::result($this->estado)->getDescription();
+    }
+    
     /**
      * @return the $id_mantenimiento
      */
@@ -535,8 +550,21 @@ class MantenimientoDto extends ADto
     {
         $this->yn_equipo_funcionando = $yn_equipo_funcionando;
     }
-     
     
-    
-    
+    /**
+     * @return the $list_tecnicos_enum
+     */
+    public function getList_tecnicos_enum()
+    {
+        return $this->list_tecnicos_enum;
+    }
+
+    /**
+     * @param array $list_tecnicos_enum
+     */
+    public function setList_tecnicos_enum($list_tecnicos_enum)
+    {
+        $this->list_tecnicos_enum = $list_tecnicos_enum;
+    }
+
 }

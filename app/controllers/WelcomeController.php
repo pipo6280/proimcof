@@ -14,6 +14,7 @@ use system\Core\Output;
 use app\dtos\SessionDto;
 use system\Session\Session;
 use app\dtos\WelcomeDto;
+use app\enums\EEstadoMantenimiento;
 
 /**
  *
@@ -112,13 +113,16 @@ class WelcomeController extends Controller
      * @since {01/05/2016}
      */
     public function index()
-    {}
+    {
+        
+    }
 
     public function birthday()
     {
         $this->view = 'birthday';
-        $model = new \app\models\UsuarioModel();
-        //$this->object->setListBirthDay($model->getClientesCumpleaños(Util::fechaActual(), TRUE));
+        $model = new \app\models\MantenimientoModel();
+        $this->object->setListBirthDay($model->getListMantenimientosPorRepresentante(Util::userSessionDto()->getIdPersona(), EEstadoMantenimiento::index(EEstadoMantenimiento::SOLICITADO)->getId()));
+       // Chis->object->setListBirthDay($model->getListMantenimientosPorRepresentante(Util::userSessionDto()->getIdUsuario(), EEstadoMantenimiento::index(EEstadoMantenimiento::SOLICITADO)->getId()));
     }
 
     /**

@@ -16,6 +16,7 @@ use app\models\MantenimientoModel;
 use app\models\ServicioModel;
 use app\models\EquipoModel;
 use app\dtos\RecargasDto;
+use app\models\RepresentanteModel;
 
 /**
  *
@@ -27,6 +28,8 @@ class MantenimientoController extends Controller
 {
     
     private $servicioModel = null;
+    
+    private $representanteModel = null;
     
     //private $equipoModel = null;
     
@@ -42,6 +45,7 @@ class MantenimientoController extends Controller
         $this->object = new MantenimientoDto();
         $this->model = new MantenimientoModel();
         $this->servicioModel = new ServicioModel();
+        $this->representanteModel = new RepresentanteModel();
         //$this->equipoModel= new EquipoModel();
         $this->template = 'admin';
         $this->module = 'mantenimiento';
@@ -130,7 +134,9 @@ class MantenimientoController extends Controller
         
         $this->view ="mantenimiento";
         $this->_array['menu'] = $oMenu->getMenuHorizontal($sessionDto->getIdUsuario(), 63);
-        $this->object->setList_clientes_enum($this->model->getListClientesEnum());
+        
+        $this->object->setList_mantenimientos($this->model->getListMantenimientosPorRepresentante($sessionDto->getPersonaDto()->getId_persona(), $this->object->getEstado()));
+        //$this->object->setList_clientes_enum($this->model->getListClientesEnum());
     }
     
     
@@ -150,12 +156,37 @@ class MantenimientoController extends Controller
     }
     
     /**
+     *
+     * @tutorial Method Description:
+     * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
+     * @since {28/06/2020}
+     */
+    public function ordenes(){
+        $sessionDto = Util::userSessionDto();
+        $oMenu = new \app\models\MenuModel();
+        
+        $this->view ="ordenes";
+        $this->_array['menu'] = $oMenu->getMenuHorizontal($sessionDto->getIdUsuario(), 64);
+        $this->object->setList_clientes_enum($this->model->getListClientesEnum());
+    }
+    
+    /**
      * @tutorial Method Description:
      * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
      * @since {23/05/2020}
      */
     public function buscar_equipos() {
         $this->recargas();
+        $this->object->setList($this->model->getEquipos($this->object->getSearch_equipo(), $this->object->getId_cliente()));
+    }
+    
+    /**
+     * @tutorial Method Description:
+     * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
+     * @since {29/06/2020}
+     * */
+    public function buscar_equipos_mantenimiento() {
+        $this->ordenes();
         $this->object->setList($this->model->getEquipos($this->object->getSearch_equipo(), $this->object->getId_cliente()));
     }
     
@@ -169,14 +200,14 @@ class MantenimientoController extends Controller
     public function edit()
     {
         $this->view = 'registro';
-        $this->object->setList_servicios_enum($this->servicioModel->getListServiciosEnum(null));
+        $this->object->setList_tecnicos_enum($this->representanteModel->getListRepresentantesEnum());
         $lisEquipos = $this->model->getEquipos(null, null, $this->object->getId_equipo());
         
         foreach ($lisEquipos as $equipo) {
             $this->object->setEquipoDto($equipo);
         }
         
-        $this->object->setList_mantenimientos($this->model->getListMantenimientos($this->object->getId_equipo()));
+        //$this->object->setList_mantenimientos($this->model->getListMantenimientos($this->object->getId_equipo()));
     }
     
     /*
@@ -217,6 +248,24 @@ class MantenimientoController extends Controller
         
         $this->object->setList_mantenimientos($this->model->getListMantenimientos($this->object->getId_equipo()));
         
+    }
+    
+    
+    /**
+     *
+     * @tutorial Method Description:
+     * @author Rodolfo Perez Gomez -- pipo6280@gmail.com
+     * @since {14/02/2017}
+     */
+    public function save_solicitud() {
+        $this->_array['contenido'] = false;
+        
+        //$this->object->setDto(new MantenimientoDto());
+        // Persistir::postADto($this->object);
+        //$this->object->getDto()->setId_equipo($this->object->getId_equipo());
+        if ($this->object->getId_representante() != null ) {
+            $this->_array['contenido'] = $this->model->saveMantenimiento($this->object);
+        }
     }
     
     /**

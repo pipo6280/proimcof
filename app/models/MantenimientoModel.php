@@ -11,6 +11,7 @@ use app\dtos\ClienteSedeDto;
 use app\dtos\MantenimientoDto;
 use app\dtos\RhRepresentanteDto;
 use app\dtos\RecargasDto;
+use app\enums\EEstadoMantenimiento;
 /**
  * 
  * @tutorial Working Class
@@ -179,6 +180,100 @@ class MantenimientoModel
         
     }
     
+    
+    /**
+     *
+     * @param unknown $idEquipo
+     * @throws Exception
+     * @return array|\app\dtos\MantenimientoDto
+     */
+    public function getListMantenimientosPorRepresentante($idPersona= null, $estado = null) {
+        
+        try {
+            $result = array();
+            $arrayParams = array();
+            $sql = 'SELECT
+                        mnt.*,
+                        srv.id_servicio,
+                        srv.descripcion descripcion_servicio,
+                        prs.id_persona,
+                        prs.primer_nombre,
+                        prs.segundo_nombre,
+                        prs.primer_apellido,
+                        prs.segundo_apellido,
+                        eqp.id_equipo,
+                        eqp.id_modelo,
+                        eqp.serial_equipo,
+                        eqp.descripcion,
+                        eqp.estado,
+                        mdl.tipo,
+                        mdl.modelo,
+                        mdl.estilo,
+                        mrc.id_marca,
+                        mrc.nombre,
+                        cls.id_cliente_sede,
+                        cls.nombre nombre_sede,
+                        clt.id_cliente,
+                        clt.nombre_empresa
+                    FROM mantenimiento mnt
+                    LEFT JOIN servicio srv ON mnt.id_servicio = srv.id_servicio
+                    INNER JOIN rh_representante rpt ON mnt.id_representante = rpt.id_representante
+                    INNER JOIN persona prs ON rpt.id_persona = prs.id_persona
+                    INNER JOIN equipo eqp ON mnt.id_equipo = eqp.id_equipo
+                    INNER JOIN equipo_modelo mdl
+                        ON mdl.id_modelo = eqp.id_modelo
+                    INNER JOIN equipo_marca mrc
+                        ON mrc.id_marca = mdl.id_marca
+                    INNER JOIN cliente_sede_equipo cse
+                        ON cse.id_equipo = eqp.id_equipo
+                    INNER JOIN cliente_sede cls
+                        ON cls.id_cliente_sede = cse.id_cliente_sede
+                    INNER JOIN cliente clt
+                        ON cls.id_cliente = clt.id_cliente 
+                WHERE 1 ';
+            
+            if (! Util::isVacio($idPersona)) {
+                $sql .= " AND rpt.id_persona = :idrepresentante ";
+                $arrayParams[':idrepresentante'] = $idPersona;
+            }
+            
+            if (! Util::isVacio($estado)) {
+                $sql .= " AND mnt.estado = :estado ";
+                $arrayParams[':estado'] = $estado;
+            }
+            
+            $sql .= " ORDER BY mnt.fecha DESC";
+            
+            $statement = Doctrine::prepare($sql);
+            $statement->execute($arrayParams);
+            $list = $statement->fetchAll();  
+            
+            foreach ($list as $row) {
+                $object = new MantenimientoDto();
+                Util::setObjectRow($object, $row);
+                Util::setObjectRow($object->getPersonaDto(), $row);
+                
+                Util::setObjectRow($object->getEquipoDto(), $row);
+                Util::setObjectRow($object->getEquipoDto()->getModeloDto(), $row);
+                Util::setObjectRow($object->getEquipoDto()->getMarcaDto(), $row);
+                
+                $clienteSede = new ClienteSedeDto();
+                $clienteSede->setId_cliente_sede($row['id_cliente_sede']);
+                $clienteSede->setNombre($row['nombre_sede']);
+                Util::setObjectRow($clienteSede->getClienteDto(),$row);
+                
+                $object->getEquipoDto()->setClienteSedeDto($clienteSede);
+                
+                $result[] = $object;
+            }
+            
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return $result;
+        
+    }
+    
     /**
      * 
      * @param unknown $idEquipo
@@ -308,6 +403,47 @@ class MantenimientoModel
         }
         return $result;
     }
+    
+    /**
+     *
+     * @param ServicioDto $object
+     * @throws Exception
+     * @return boolean|number
+     */
+    public function saveMantenimiento(MantenimientoDto $object)
+    {
+        try {
+            $result = false;
+            //$representante = $this->getRepresentanteIdPersona(Util::userSessionDto()->getPersonaDto()->getId_persona());
+            //$data['descripcion'] = $object->getDescripcion();
+            //$data['pendientes'] = $object->getPendientes();
+            $data['fecha'] = Util::fecha($object->getFecha());
+            $data['id_equipo'] = $object->getId_equipo();
+            $data['id_representante'] = $object->getId_representante();
+            $data['estado'] = EEstadoMantenimiento::index(EEstadoMantenimiento::SOLICITADO)->getId();
+            $data['antecedente'] = $object->getAntecedente();
+            //$data['contador_negro'] = $object->getContador_negro();
+//             $data['contador_cyan'] = $object->getContador_cyan();
+//             $data['contador_magenta'] = $object->getContador_magenta();
+//             $data['contador_amarillo'] = $object->getContador_amarillo();
+            
+            if (Util::isVacio($object->getId_mantenimiento())) {
+                $data['id_usuario_registra'] = Util::userSessionDto()->getIdUsuario();
+                $data['fecha_registro'] = Util::fechaActual(true);
+                $result = Doctrine::insert('mantenimiento', $data);
+            } else {
+                $data['id_usuario_modifica'] = Util::userSessionDto()->getIdUsuario();
+                $data['fecha_modifica'] = Util::fechaActual(true);
+                $result = Doctrine::update('mantenimiento', $data, [
+                    'id_mantenimiento' => $object->getId_mantenimiento()
+                ]);
+            }
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
     
     /**
      * 

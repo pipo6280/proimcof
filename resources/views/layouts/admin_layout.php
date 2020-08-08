@@ -5,6 +5,7 @@ use app\dtos\SessionDto;
 use system\Core\Message;
 use app\dtos\ClienteDto;
 use system\Support\Arr;
+use app\dtos\MantenimientoDto;
 
 $sessionDto = Util::userSessionDto();
 $sessionDto = $sessionDto instanceof SessionDto ? $sessionDto : new SessionDto(); ?>
@@ -90,6 +91,44 @@ $sessionDto = $sessionDto instanceof SessionDto ? $sessionDto : new SessionDto()
                                 <span class="m-r-sm text-muted welcome-message">
                                     <?php echo lang('general.welcome_to_app', lang('general.company_name')); ?>
                                 </span>
+                            </li>
+                            <li class="dropdown  b-r">
+                                <a class="dropdown count-info " data-toggle="dropdown" href="#">
+                                    <i class="fa fa-bell"></i><span class="label label-info"><?php echo Arr::count($sessionDto->getListBirthDays()); ?></span>
+                                </a>
+                                <?php if (! Util::isVacio($sessionDto->getListBirthDays())) { ?>
+                                    <ul class="dropdown-menu dropdown-messages">
+                                        <li>
+                                             <div class="text-center link-block">
+                                                <?php echo lang('general.birthday_customer_count', [Arr::count($sessionDto->getListBirthDays())]); ?>
+                                            </div>
+                                        </li>
+                                        <?php foreach ($sessionDto->getListBirthDays() as $lis) { ?>
+                                            <?php if ($lis instanceof MantenimientoDto) { ?>
+                                                <li>
+                                                    <div class="dropdown-messages-box">
+                                                        <div class="media-body">
+                                                            <small class="pull-right text-navy">
+                                                                <?php echo lang('general.birthday_customer', $lis->getFecha()); ?>
+                                                            </small>
+                                                            <strong><?php echo $lis->getEquipoDto()->getNombreEquipo(); ?></strong><br>
+                                                            <small><?php echo $lis->getEquipoDto()->getClienteSedeDto()->getClienteDto()->getNombre_empresa() ?></small><br>                                                            
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="divider"></li>
+                                            <?php } ?>
+                                        <?php } ?>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <div class="text-center link-block">
+                                                <a href="<?php echo site_url('welcome/birthday/'); ?>">
+                                                    <i class="fa fa-birthday-cake"></i> <strong><?php echo lang('general.birthday_customer_all'); ?></strong>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                <?php } ?>
                             </li>
                             
                             <li>
