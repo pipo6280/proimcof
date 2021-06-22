@@ -1,11 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "hash": "7cac62c72433c81a2db91e3d7b0067cf",
-    "content-hash": "2dd12cdc8818f510ea9508bca97ed6e5",
+    "content-hash": "f714efca573308b5edfb267427aeab7a",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -73,7 +72,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2015-08-31 12:32:49"
+            "time": "2015-08-31T12:32:49+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -143,7 +142,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2016-10-29 11:16:17"
+            "time": "2016-10-29T11:16:17+00:00"
         },
         {
             "name": "doctrine/collections",
@@ -209,7 +208,7 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2015-04-14 22:21:58"
+            "time": "2015-04-14T22:21:58+00:00"
         },
         {
             "name": "doctrine/common",
@@ -282,7 +281,7 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2015-12-25 13:18:31"
+            "time": "2015-12-25T13:18:31+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -353,7 +352,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2016-01-05 22:11:12"
+            "time": "2016-01-05T22:11:12+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -420,7 +419,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2015-11-06 14:35:42"
+            "time": "2015-11-06T14:35:42+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -474,56 +473,62 @@
                 "lexer",
                 "parser"
             ],
-            "time": "2014-09-09 13:34:57"
+            "time": "2014-09-09T13:34:57+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v5.2.16",
+            "version": "v6.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "1d85f9ef3ecfc42bbc4f3c70d5e37ca9a65f629a"
+                "reference": "a5b5c43e50b7fba655f793ad27303cd74c57363c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/1d85f9ef3ecfc42bbc4f3c70d5e37ca9a65f629a",
-                "reference": "1d85f9ef3ecfc42bbc4f3c70d5e37ca9a65f629a",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/a5b5c43e50b7fba655f793ad27303cd74c57363c",
+                "reference": "a5b5c43e50b7fba655f793ad27303cd74c57363c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.0.0"
+                "ext-ctype": "*",
+                "ext-filter": "*",
+                "ext-hash": "*",
+                "php": ">=5.5.0"
             },
             "require-dev": {
-                "phpdocumentor/phpdocumentor": "*",
-                "phpunit/phpunit": "4.7.*"
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+                "doctrine/annotations": "^1.2",
+                "phpcompatibility/php-compatibility": "^9.3.5",
+                "roave/security-advisories": "dev-latest",
+                "squizlabs/php_codesniffer": "^3.5.6",
+                "yoast/phpunit-polyfills": "^0.2.0"
             },
             "suggest": {
-                "league/oauth2-google": "Needed for Google XOAUTH2 authentication"
+                "ext-mbstring": "Needed to send email in multibyte encoding charset or decode encoded addresses",
+                "hayageek/oauth2-yahoo": "Needed for Yahoo XOAUTH2 authentication",
+                "league/oauth2-google": "Needed for Google XOAUTH2 authentication",
+                "psr/log": "For optional PSR-3 debug logging",
+                "stevenmaguire/oauth2-microsoft": "Needed for Microsoft XOAUTH2 authentication",
+                "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)"
             },
             "type": "library",
             "autoload": {
-                "classmap": [
-                    "class.phpmailer.php",
-                    "class.phpmaileroauth.php",
-                    "class.phpmaileroauthgoogle.php",
-                    "class.smtp.php",
-                    "class.pop3.php",
-                    "extras/EasyPeasyICS.php",
-                    "extras/ntlm_sasl_client.php"
-                ]
+                "psr-4": {
+                    "PHPMailer\\PHPMailer\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPL-2.1"
+                "LGPL-2.1-only"
             ],
             "authors": [
                 {
-                    "name": "Jim Jagielski",
-                    "email": "jimjag@gmail.com"
-                },
-                {
                     "name": "Marcus Bointon",
                     "email": "phpmailer@synchromedia.co.uk"
+                },
+                {
+                    "name": "Jim Jagielski",
+                    "email": "jimjag@gmail.com"
                 },
                 {
                     "name": "Andy Prevost",
@@ -534,7 +539,13 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2016-06-06 09:09:37"
+            "funding": [
+                {
+                    "url": "https://github.com/Synchro",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-06-16T14:33:43+00:00"
         }
     ],
     "packages-dev": [],
@@ -546,5 +557,6 @@
     "platform": {
         "php": ">=5.5.7"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
